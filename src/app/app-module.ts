@@ -6,17 +6,21 @@ import { App } from './app';
 import { Project } from './project/project';
 import { ProjectCard } from './project-card/project-card';
 import { ProjectDetails } from './project-details/project-details';
+import { ProjectForm } from './project-form/project-form';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     App,
     Project,
     ProjectCard,
-    ProjectDetails
+    ProjectDetails,
+    ProjectForm
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

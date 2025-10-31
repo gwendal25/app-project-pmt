@@ -1,0 +1,12 @@
+<section class="listing-apply">
+    <h2 class="section-heading">Créer un nouveau projet</h2>
+    <form [formGroup]="projectForm" (submit)="submitProject()">
+        <label for="project-name">Nom</label>
+        <input id="project-name" type="text" formControlName="name" />
+        <label for="project-description">Description</label>
+        <textarea name="project-description" id="project-description" cols="30" rows="10" formControlName="description"></textarea>
+        <label for="start-date">Date de départ</label>
+        <input id="start-date" type="date" formControlName="startDate" />
+        <button type="submit" class="primary">Créer projet</button>
+    </form>
+</section>

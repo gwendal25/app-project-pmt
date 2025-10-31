@@ -45,4 +45,10 @@ export class ProjectService {
     getProjectInfoById(id: string): ProjectInfo | undefined {
       return this.projectInfoList.find((projectInfo) => projectInfo.id === id);
     }
+
+    submitProject(projectInfo: ProjectInfo) {
+      const projectId = this.projectInfoList.length+1;
+      projectInfo.id = projectId.toString();
+      this.projectInfoList.push(projectInfo);
+    }
 }
