@@ -1,0 +1,42 @@
+.listing-heading {
+  font-size: 16pt;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.listing-description {
+  font-size: 12pt;
+  margin-bottom: 5px;
+}
+.listing-features > .section-heading {
+  color: #BADFDB;
+  font-size: 14pt;
+  margin-bottom: 15px;
+}
+.listing-features {
+  margin-bottom: 10px;
+}
+.listing-features li {
+  font-size: 12pt;
+}
+li {
+  list-style-type: none;
+}
+label, input {
+  display: block;
+}
+label {
+  color: #FFA4A4;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12pt;
+}
+input {
+  font-size: 16pt;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 400px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid .3px;
+}

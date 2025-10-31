@@ -1,0 +1,15 @@
+    <article>
+      <section class="listing-details">
+        <h3 class="listing-heading">{{ projectInfo?.name }}</h3>
+        <small>{{ projectInfo?.startDate | date:'dd/MM/yyyy' }}</small>
+        <p class="listing-description">{{ projectInfo?.description }}</p>
+      </section>
+      <section class="listing-features">
+        <h2 class="section-heading">Tâches du projet</h2>
+        <ul>
+          <li>Tâches à faire</li>
+          <li>Tâches en cours</li>
+          <li>Tâches terminées</li>
+        </ul>
+      </section>
+    </article>

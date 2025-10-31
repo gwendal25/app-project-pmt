@@ -1,4 +1,5 @@
 <section class="listing">
     <h3 class="listing-heading">{{projectInfo().name}} <small>{{projectInfo().startDate | date:'dd/MM/yyyy'}}</small></h3>
     <p class="listing-description">{{projectInfo().description}}</p>
+    <a [routerLink]="['/project-details', projectInfo().id]">Détails</a>
 </section>
