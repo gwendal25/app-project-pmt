@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProjectService } from '../project-service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -16,9 +16,9 @@ export class ProjectForm implements OnInit {
   projectService = inject(ProjectService);
 
   projectForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    startDate: new FormControl(moment([2025, 0, 1]))
+    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(15)]),
+    startDate: new FormControl(moment([2025, 0, 1]), Validators.required)
   });
 
   datePipe = new DatePipe('fr-FR');
