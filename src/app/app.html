@@ -1,10 +1,11 @@
 <main>
-  <header class="brand-name">
-    <a [routerLink]="['/']">
-      <h1>{{title}}</h1>
-    </a>
-    <a [routerLink]="['/project-form']"><button>Nouveau projet</button></a>
-  </header>
+  <mat-toolbar>
+      <a matIconButton class="example-icon" aria-label="Example icon-button with menu icon" [routerLink]="['/']">
+        <mat-icon>home</mat-icon>
+      </a>
+      <span>{{title}}</span>
+      <a matButton="outlined" [routerLink]="['/project-form']"><mat-icon>create_new_folder</mat-icon> Nouveau projet</a>
+  </mat-toolbar>
   <section class="content">
       <router-outlet />
   </section>

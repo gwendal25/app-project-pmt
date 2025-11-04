@@ -7,11 +7,40 @@ import { Project } from './project/project';
 import { ProjectCard } from './project-card/project-card';
 import { ProjectDetails } from './project-details/project-details';
 import { ProjectForm } from './project-form/project-form';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
+
+import {MAT_DATE_LOCALE} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
+import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {default as _rollupMoment} from 'moment';
+const moment = _rollupMoment || _moment;
+
+export const CUSTOM_DATE_FORMATS = {
+    parse: {
+        dateInput: 'DD-MM-YYYY',
+    },
+    display: {
+        dateInput: 'DD/MM/YYYY',
+        monthYearLabel: 'MMMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY',
+    },
+};
 
 @NgModule({
   declarations: [
@@ -24,12 +53,24 @@ registerLocaleData(localeFr);
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideMomentDateAdapter(CUSTOM_DATE_FORMATS),
     { provide: LOCALE_ID, useValue: 'fr-FR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'fr'}
   ],
   bootstrap: [App]
 })

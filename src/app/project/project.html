@@ -1,9 +1,3 @@
-<section>
-    <form>
-        <input type="text" name="filterProject" id="filter-project" />
-        <button class="primary" type="button">Search</button>
-    </form>
-</section>
 <section class="results">
     @for(projectInfo of projectInfoList; track $index) {
         <app-project-card [projectInfo]="projectInfo"></app-project-card>

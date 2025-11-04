@@ -1,15 +1,20 @@
     <article>
       <section class="listing-details">
         <h3 class="listing-heading">{{ projectInfo?.name }}</h3>
-        <small>{{ projectInfo?.startDate | date:'dd/MM/yyyy' }}</small>
+        <small class="listing-date">Date de début : {{ projectInfo?.startDate | date:'dd/MM/yyyy' }}</small>
+        <h5 class="listing-small-heading">Description</h5>
         <p class="listing-description">{{ projectInfo?.description }}</p>
       </section>
-      <section class="listing-features">
-        <h2 class="section-heading">Tâches du projet</h2>
-        <ul>
-          <li>Tâches à faire</li>
-          <li>Tâches en cours</li>
-          <li>Tâches terminées</li>
-        </ul>
+      <section>
+        <mat-card class="example-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title>Tâche #1</mat-card-title>
+            <mat-card-subtitle><small>Date d'échéance : dd/MM/yyyy</small></mat-card-subtitle>
+          </mat-card-header>
+            <mat-card-actions>
+              <button matButton>Détails</button>
+              <button matButton>Modifier</button>
+            </mat-card-actions>
+        </mat-card>
       </section>
     </article>

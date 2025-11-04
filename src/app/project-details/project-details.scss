@@ -3,23 +3,17 @@
   font-weight: bold;
   margin-bottom: 5px;
 }
-.listing-description {
-  font-size: 12pt;
+.listing-small-heading {
+  font-size: 14pt;
+  font-weight: normal;
   margin-bottom: 5px;
 }
-.listing-features > .section-heading {
-  color: #BADFDB;
-  font-size: 14pt;
-  margin-bottom: 15px;
+.listing-date {
+  margin-bottom: 5px;
 }
-.listing-features {
-  margin-bottom: 10px;
-}
-.listing-features li {
+.listing-description {
   font-size: 12pt;
-}
-li {
-  list-style-type: none;
+  margin-bottom: 25px;
 }
 label, input {
   display: block;
@@ -39,4 +33,18 @@ input {
   border-right: none;
   border-left: none;
   border-bottom: solid .3px;
+}
+
+article {
+  padding: 20pt;
+  background-color: #BADFDB;
+  min-height: 100%;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-card-footer {
+  padding: 16px;
 }

@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../project-service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-
+import moment from 'moment';
 
 @Component({
   selector: 'app-project-form',
@@ -11,17 +11,21 @@ import { DatePipe } from '@angular/common';
   templateUrl: './project-form.html',
   styleUrl: './project-form.scss'
 })
-export class ProjectForm {
+export class ProjectForm implements OnInit {
   private router:Router = inject(Router);
   projectService = inject(ProjectService);
 
   projectForm = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),
-    startDate: new FormControl(new Date())
+    startDate: new FormControl(moment([2025, 0, 1]))
   });
 
   datePipe = new DatePipe('fr-FR');
+
+  ngOnInit(): void {
+    moment.locale("fr");
+  }
 
   submitProject() {
     if(!this.projectForm.valid) {
@@ -31,7 +35,7 @@ export class ProjectForm {
     const name = this.projectForm.value.name ?? '';
     const description = this.projectForm.value.description ?? '';
     const startDate = this.projectForm.value.startDate ?? new Date();
-    const formattedDate = this.datePipe.transform(startDate, 'yyyy-MM-dd HH:mm:ss') ?? '';
+    const formattedDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss') ?? '';
     const projectDto = { name: name, description: description, startDate: formattedDate };
     this.projectService.submitProject(projectDto)
     .subscribe({

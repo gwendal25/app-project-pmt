@@ -1,12 +1,25 @@
 <section class="listing-apply">
     <h2 class="section-heading">Créer un nouveau projet</h2>
     <form [formGroup]="projectForm" (submit)="submitProject()">
-        <label for="project-name">Nom</label>
-        <input id="project-name" type="text" formControlName="name" />
-        <label for="project-description">Description</label>
-        <textarea name="project-description" id="project-description" cols="30" rows="10" formControlName="description"></textarea>
-        <label for="start-date">Date de départ</label>
-        <input id="start-date" type="date" formControlName="startDate" />
-        <button type="submit" class="primary">Créer projet</button>
+        <mat-form-field class="example-full-width">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput required formControlName="name" placeholder="Ex. Projet de factory">
+        </mat-form-field>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput required placeholder="Ex. La factory doit continuer de grandir..." cols="50" rows="10" formControlName="description"></textarea>
+            </mat-form-field>
+        </p>
+        <mat-form-field>
+            <mat-label>Date de départ</mat-label>
+            <input matInput required [matDatepicker]="picker" formControlName="startDate">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <p>
+            <button type="submit" matButton="filled">Créer projet</button>
+        </p>
     </form>
 </section>
