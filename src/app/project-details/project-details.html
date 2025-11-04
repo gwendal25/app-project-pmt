@@ -4,6 +4,7 @@
         <small class="listing-date">Date de début : {{ projectInfo?.startDate | date:'dd/MM/yyyy' }}</small>
         <h5 class="listing-small-heading">Description</h5>
         <p class="listing-description">{{ projectInfo?.description }}</p>
+        <a [routerLink]="['/project-form', projectInfo?.id]" matButton>Modifier</a>
       </section>
       <section>
         <mat-card class="example-card" appearance="outlined">

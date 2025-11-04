@@ -10,6 +10,6 @@
   </mat-card-content>
   <mat-card-actions>
     <a [routerLink]="['/project-details', projectInfo().id]" matButton>Détails</a>
-    <a matButton>Modifier</a>
+    <a [routerLink]="['/project-form', projectInfo().id]" matButton>Modifier</a>
   </mat-card-actions>
 </mat-card>

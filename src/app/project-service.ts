@@ -33,6 +33,10 @@ export class ProjectService {
       return this.httpClient.post<ProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
     }
 
+    updateProject(id: number, projectDto: ProjectDto) {
+      return this.httpClient.put<ProjectInfo>(this.endpoint + "/" + id, JSON.stringify(projectDto), this.httpOptions);
+    } 
+
     handleError(error:any) {
     let errorMessage = '';
 
