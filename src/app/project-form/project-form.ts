@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ProjectService } from '../project-service';
-import { Project } from '../project/project';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -21,6 +21,8 @@ export class ProjectForm {
     startDate: new FormControl(new Date())
   });
 
+  datePipe = new DatePipe('fr-FR');
+
   submitProject() {
     if(!this.projectForm.valid) {
       return;
@@ -29,9 +31,17 @@ export class ProjectForm {
     const name = this.projectForm.value.name ?? '';
     const description = this.projectForm.value.description ?? '';
     const startDate = this.projectForm.value.startDate ?? new Date();
-    const projectInfo = { id: "0", name: name, description: description, startDate: startDate };
-    this.projectService.submitProject(projectInfo);
-    this.router.navigate(['/']);
+    const formattedDate = this.datePipe.transform(startDate, 'yyyy-MM-dd HH:mm:ss') ?? '';
+    const projectDto = { name: name, description: description, startDate: formattedDate };
+    this.projectService.submitProject(projectDto)
+    .subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        console.log("Error when creating the project");
+      }
+    })
   }
 
 }

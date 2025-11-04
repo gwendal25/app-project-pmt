@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProjectInfo } from '../project';
 import { ProjectService } from '../project-service';
 
@@ -8,11 +8,14 @@ import { ProjectService } from '../project-service';
   templateUrl: './project.html',
   styleUrl: './project.scss',
 })
-export class Project {
+export class Project implements OnInit {
   projectInfoList: ProjectInfo[] = [];
   projectService: ProjectService = inject(ProjectService);
 
-  constructor() {
-    this.projectInfoList = this.projectService.getAllProjectInfos();
+  ngOnInit(): void {
+    this.projectService.getAllProjectInfos()
+    .subscribe((projects) => {
+      this.projectInfoList = projects;
+    })
   }
 }

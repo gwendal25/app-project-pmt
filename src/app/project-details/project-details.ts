@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../project-service';
 import { ProjectInfo } from '../project';
@@ -9,13 +9,21 @@ import { ProjectInfo } from '../project';
   templateUrl: './project-details.html',
   styleUrl: './project-details.scss',
 })
-export class ProjectDetails {
+export class ProjectDetails implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
-  projectService = inject(ProjectService);
-  projectInfo: ProjectInfo | undefined;
+  projectService: ProjectService = inject(ProjectService);
+
+  id:number = this.route.snapshot.params['id'];
+  projectInfo: ProjectInfo;
 
   constructor() {
-    const projectId = this.route.snapshot.params['id'];
-    this.projectInfo = this.projectService.getProjectInfoById(projectId);
+    this.projectInfo = { id: 0, name: "", description: "", startDate: new Date() };
+  }
+
+  ngOnInit(): void {
+    this.projectService.getProjectInfoById(this.id)
+    .subscribe((project) => {
+      this.projectInfo = project;
+    })
   }
 }

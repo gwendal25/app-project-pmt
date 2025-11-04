@@ -1,54 +1,47 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ProjectInfo } from './project';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+import { ProjectDto } from './projectDto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  projectInfoList: ProjectInfo[] = [
-      {
-        id: "1",
-        name: "Project Legends Platinium",
-        description: "A game set in the Kanto region where the protagonist goes to the mirror world.",
-        startDate: new Date()
-      },
-      {
-        id: "2",
-        name: "Project Legends Soulsilver",
-        description: "A game set in the Kanto region where the protagonist goes to the mirror world.",
-        startDate: new Date()
-      },
-      {
-        id: "3",
-        name: "Project Legends Heartgold",
-        description: "A game set in the Kanto region where the protagonist goes to the mirror world.",
-        startDate: new Date()
-      },
-      {
-        id: "4",
-        name: "Project Zelda Dark Princess",
-        description: "A game set in the Kanto region where the protagonist goes to the mirror world.",
-        startDate: new Date()
-      },
-      {
-        id: "5",
-        name: "Project Zelda Sky kingdoms",
-        description: "A game set in the Kanto region where the protagonist goes to the mirror world.",
-        startDate: new Date()
-      },
-    ];
+  endpoint = 'http://localhost:8081/projects';
+  private httpClient:HttpClient = inject(HttpClient);
 
-    getAllProjectInfos(): ProjectInfo[] {
-      return this.projectInfoList;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    })
+  }
+
+    getAllProjectInfos(): Observable<ProjectInfo[]> {
+      return this.httpClient.get<ProjectInfo[]>(this.endpoint);
     }
 
-    getProjectInfoById(id: string): ProjectInfo | undefined {
-      return this.projectInfoList.find((projectInfo) => projectInfo.id === id);
+    getProjectInfoById(id: number): Observable<ProjectInfo> {
+      return this.httpClient.get<ProjectInfo>(this.endpoint + "/" + id)
+      .pipe(
+        catchError(this.handleError)
+      );
     }
 
-    submitProject(projectInfo: ProjectInfo) {
-      const projectId = this.projectInfoList.length+1;
-      projectInfo.id = projectId.toString();
-      this.projectInfoList.push(projectInfo);
+    submitProject(projectDto: ProjectDto) {
+      return this.httpClient.post<ProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
     }
+
+    handleError(error:any) {
+    let errorMessage = '';
+
+     if (error.error instanceof ErrorEvent) {
+        errorMessage = error.message;
+    } else {
+        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+
+    return throwError(() => new Error(errorMessage));
+}
 }
