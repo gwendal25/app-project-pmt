@@ -23,11 +23,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatSelectModule} from '@angular/material/select';
 
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment} from 'moment';
+import { TaskForm } from './task-form/task-form';
 const moment = _rollupMoment || _moment;
 
 export const CUSTOM_DATE_FORMATS = {
@@ -48,7 +50,8 @@ export const CUSTOM_DATE_FORMATS = {
     Project,
     ProjectCard,
     ProjectDetails,
-    ProjectForm
+    ProjectForm,
+    TaskForm
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,8 @@ export const CUSTOM_DATE_FORMATS = {
     MatProgressBarModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatSelectModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

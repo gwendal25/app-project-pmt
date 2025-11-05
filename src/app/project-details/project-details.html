@@ -5,6 +5,7 @@
         <h5 class="listing-small-heading">Description</h5>
         <p class="listing-description">{{ projectInfo?.description }}</p>
         <a [routerLink]="['/project-form', projectInfo?.id]" matButton>Modifier</a>
+        <a [routerLink]="['/project', projectInfo?.id, 'task-form']" matButton>Nouvelle tâche</a>
       </section>
       <section>
         @for(taskInfo of projectInfo.tasks; track taskInfo.id) {

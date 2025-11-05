@@ -27,7 +27,7 @@ export class ProjectForm implements OnInit {
   
   id: number = 0;
   isAddMode: boolean = true;
-  isLoading: boolean = true;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
     moment.locale("fr");

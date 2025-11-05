@@ -1,0 +1,43 @@
+<section class="listing-apply">
+    <h2 class="section-heading">Créer une nouvelle tâche</h2>
+    <form [formGroup]="taskForm" (submit)="submitTask()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput required formControlName="name" placeholder="Ex. poser les briques">
+        </mat-form-field>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput required placeholder="Ex. Agrandissement du secteur de culture des parasites" cols="50" rows="10" formControlName="description"></textarea>
+            </mat-form-field>
+        </p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Date d'échéance</mat-label>
+            <input matInput required [matDatepicker]="picker" formControlName="endDate">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Priorité</mat-label>
+            <mat-select formControlName="taskPriority" required>
+                <mat-option [value]="null">-</mat-option>
+                @for (priority of TaskPriority | keyvalue; track priority) {
+                    <mat-option [value]="priority.key">{{priority.value}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="taskStatus" required>
+                <mat-option [value]="null">-</mat-option>
+                @for (status of TaskStatus | keyvalue; track status) {
+                    <mat-option [value]="status.key">{{status.value}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <p>
+            <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Créer tâche</button>
+        </p>
+    </form>
+</section>

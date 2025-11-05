@@ -3,6 +3,8 @@ import { ProjectInfo } from './project';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ProjectDto } from './projectDto';
+import { TaskDto } from './TaskDto';
+import { TaskInfo } from './task';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +33,10 @@ export class ProjectService {
 
     submitProject(projectDto: ProjectDto) {
       return this.httpClient.post<ProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
+    }
+
+    createTask(id: number, taskDto: TaskDto) {
+      return this.httpClient.post<TaskInfo>(this.endpoint + "/" + id + "/tasks", JSON.stringify(taskDto), this.httpOptions);
     }
 
     updateProject(id: number, projectDto: ProjectDto) {
