@@ -7,15 +7,32 @@
         <a [routerLink]="['/project-form', projectInfo?.id]" matButton>Modifier</a>
       </section>
       <section>
-        <mat-card class="example-card" appearance="outlined">
-          <mat-card-header>
-            <mat-card-title>Tâche #1</mat-card-title>
-            <mat-card-subtitle><small>Date d'échéance : dd/MM/yyyy</small></mat-card-subtitle>
-          </mat-card-header>
+        @for(taskInfo of projectInfo.tasks; track taskInfo.id) {
+          <mat-card class="example-card" appearance="outlined">
+            <mat-card-header>
+              <mat-card-title>{{ taskInfo?.name }}</mat-card-title>
+              <mat-card-subtitle><small>Date d'échéance : {{ taskInfo?.endDate | date:'dd/MM/yyyy' }}</small></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{ taskInfo?.description }}
+              </p>
+            </mat-card-content>
             <mat-card-actions>
               <button matButton>Détails</button>
               <button matButton>Modifier</button>
             </mat-card-actions>
-        </mat-card>
+              <mat-card-footer class="example-card-footer">
+                <mat-chip-set aria-label="task traits">
+                  @if(taskInfo.taskStatus !== undefined){
+                    <mat-chip>Statut : {{ getTaskStatusValue(taskInfo.taskStatus) }}</mat-chip>
+                  }
+                  @if(taskInfo.taskPriority !== undefined) {
+                    <mat-chip>Priorité : {{ getTaskPriorityValue(taskInfo.taskPriority) }}</mat-chip>
+                  }
+                  </mat-chip-set>
+              </mat-card-footer>
+          </mat-card>
+        }
       </section>
     </article>
