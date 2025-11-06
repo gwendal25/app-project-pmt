@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../project-service';
 import { ProjectInfo } from '../project';
 import { TaskPriority } from '../enums/taskPriority';
-import { TaskStatus } from '../enums/TaskStatus';
+import { TaskStatus } from '../enums/taskStatus';
 
 @Component({
   selector: 'app-project-details',

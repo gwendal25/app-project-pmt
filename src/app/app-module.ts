@@ -30,6 +30,7 @@ import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {default as _rollupMoment} from 'moment';
 import { TaskForm } from './task-form/task-form';
+import { TaskDetails } from './task-details/task-details';
 const moment = _rollupMoment || _moment;
 
 export const CUSTOM_DATE_FORMATS = {
@@ -51,7 +52,8 @@ export const CUSTOM_DATE_FORMATS = {
     ProjectCard,
     ProjectDetails,
     ProjectForm,
-    TaskForm
+    TaskForm,
+    TaskDetails
   ],
   imports: [
     BrowserModule,

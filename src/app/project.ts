@@ -1,9 +1,9 @@
-import { TaskInfo } from "./task";
+import { ProjectTaskInfo } from "./projectTask";
 
 export interface ProjectInfo {
     id: number;
     name: string;
     description: string;
     startDate: Date;
-    tasks: Array<TaskInfo> | null;
+    tasks: Array<ProjectTaskInfo> | null;
 }

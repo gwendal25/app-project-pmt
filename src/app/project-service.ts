@@ -3,7 +3,7 @@ import { ProjectInfo } from './project';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { ProjectDto } from './projectDto';
-import { TaskDto } from './TaskDto';
+import { TaskDto } from './taskDto';
 import { TaskInfo } from './task';
 
 @Injectable({
