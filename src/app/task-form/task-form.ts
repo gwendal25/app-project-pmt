@@ -34,8 +34,8 @@ export class TaskForm implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(15)]),
     endDate: new FormControl(moment([2025, 0, 1]), Validators.required),
-    taskPriority: new FormControl(TaskPriority.MEDIUM, Validators.required),
-    taskStatus: new FormControl(TaskStatus.NOT_STARTED, Validators.required),
+    taskPriority: new FormControl<TaskPriority>(TaskPriority.MEDIUM, Validators.required),
+    taskStatus: new FormControl<TaskStatus>(TaskStatus.NOT_STARTED, Validators.required),
   });
 
   datePipe = new DatePipe('fr-FR');
@@ -60,6 +60,11 @@ export class TaskForm implements OnInit {
             taskStatus: task.taskStatus
           });
         }
+      })
+    } else {
+      this.taskForm.patchValue({
+        taskPriority: null,
+        taskStatus: null
       })
     }
   }

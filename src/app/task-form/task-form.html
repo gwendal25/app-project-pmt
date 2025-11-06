@@ -9,36 +9,77 @@
         <mat-form-field class="example-full-width">
             <mat-label>Nom</mat-label>
             <input type="text" matInput required formControlName="name" placeholder="Ex. poser les briques">
+            @if (taskForm.get('name')?.hasError('required')) {
+                <mat-error>
+                    Le nom du projet est <strong>obligatoire</strong>
+                </mat-error>
+            }
+            @if (taskForm.get('name')?.hasError('minlength')) {
+                <mat-error>
+                    Le nom du projet doit faire au moins <strong>5 charactères</strong>
+                </mat-error>
+            }
         </mat-form-field>
         <p>
             <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
                 <textarea matInput required placeholder="Ex. Agrandissement du secteur de culture des parasites" cols="50" rows="10" formControlName="description"></textarea>
+                @if (taskForm.get('description')?.hasError('required')) {
+                    <mat-error>
+                        La description du projet est <strong>obligatoire</strong>
+                    </mat-error>
+                }
+                @if (taskForm.get('description')?.hasError('minlength')) {
+                    <mat-error>
+                        La description du projet doit faire au moins <strong>15 charactères</strong>
+                    </mat-error>
+                }
             </mat-form-field>
         </p>
-        <mat-form-field class="example-full-width">
-            <mat-label>Date d'échéance</mat-label>
-            <input matInput required [matDatepicker]="picker" formControlName="endDate">
-            <mat-hint>DD/MM/YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Priorité</mat-label>
-            <mat-select formControlName="taskPriority" required>
-                @for (priority of TaskPriority | keyvalue; track priority) {
-                    <mat-option [value]="priority.key">{{priority.value}}</mat-option>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Date d'échéance</mat-label>
+                <input matInput required [matDatepicker]="picker" formControlName="endDate">
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                @if (taskForm.get('endDate')?.hasError('required')) {
+                    <mat-error>
+                        La date de début du projet est <strong>obligatoire</strong>
+                    </mat-error>
                 }
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Status</mat-label>
-            <mat-select formControlName="taskStatus" required>
-                @for (status of TaskStatus | keyvalue; track status) {
-                    <mat-option [value]="status.key">{{status.value}}</mat-option>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Priorité</mat-label>
+                <mat-select formControlName="taskPriority" required>
+                    @for (priority of TaskPriority | keyvalue; track priority) {
+                        <mat-option [value]="priority.key">{{priority.value}}</mat-option>
+                    }
+                </mat-select>
+                @if (taskForm.get('taskPriority')?.hasError('required')) {
+                    <mat-error>
+                        La priorité du projet est <strong>obligatoire</strong>
+                    </mat-error>
                 }
-            </mat-select>
-        </mat-form-field>
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="taskStatus" required>
+                    @for (status of TaskStatus | keyvalue; track status) {
+                        <mat-option [value]="status.key">{{status.value}}</mat-option>
+                    }
+                </mat-select>
+                @if (taskForm.get('taskStatus')?.hasError('required')) {
+                    <mat-error>
+                        Le status du projet est <strong>obligatoire</strong>
+                    </mat-error>
+                }
+            </mat-form-field>
+        </p>
         <p>
             @if(isAddMode) {
                 <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Créer tâche</button>
