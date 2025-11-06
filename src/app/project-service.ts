@@ -44,14 +44,13 @@ export class ProjectService {
     } 
 
     handleError(error:any) {
-    let errorMessage = '';
+      let errorMessage = '';
 
-     if (error.error instanceof ErrorEvent) {
+      if (error.error instanceof ErrorEvent) {
         errorMessage = error.message;
-    } else {
+      } else {
         errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      }
+      return throwError(() => new Error(errorMessage));
     }
-
-    return throwError(() => new Error(errorMessage));
-}
 }

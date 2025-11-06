@@ -10,7 +10,8 @@ const routeConfig: Routes = [
     { path: 'project-details/:id', component: ProjectDetails, title: 'Project details'},
     { path: 'project-form', component: ProjectForm, title: 'New project' },
     { path: 'project-form/:id', component: ProjectForm, title: 'Update project' },
-    { path: 'project/:projectid/task-form', component: TaskForm, title: 'Create task' }
+    { path: 'project/:projectid/task-form', component: TaskForm, title: 'Create task' },
+    { path: 'project/:projectid/task-form/:id', component: TaskForm, title: 'Update task' }
 ]
 
 export default routeConfig;

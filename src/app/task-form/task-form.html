@@ -1,5 +1,10 @@
 <section class="listing-apply">
-    <h2 class="section-heading">Créer une nouvelle tâche</h2>
+    @if(isAddMode) {
+        <h2 class="section-heading">Créer une nouvelle tâche</h2>
+    }
+    @else {
+        <h2 class="section-heading">Modifier une tâche</h2>
+    }
     <form [formGroup]="taskForm" (submit)="submitTask()">
         <mat-form-field class="example-full-width">
             <mat-label>Nom</mat-label>
@@ -21,7 +26,6 @@
         <mat-form-field>
             <mat-label>Priorité</mat-label>
             <mat-select formControlName="taskPriority" required>
-                <mat-option [value]="null">-</mat-option>
                 @for (priority of TaskPriority | keyvalue; track priority) {
                     <mat-option [value]="priority.key">{{priority.value}}</mat-option>
                 }
@@ -30,14 +34,18 @@
         <mat-form-field>
             <mat-label>Status</mat-label>
             <mat-select formControlName="taskStatus" required>
-                <mat-option [value]="null">-</mat-option>
                 @for (status of TaskStatus | keyvalue; track status) {
                     <mat-option [value]="status.key">{{status.value}}</mat-option>
                 }
             </mat-select>
         </mat-form-field>
         <p>
-            <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Créer tâche</button>
+            @if(isAddMode) {
+                <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Créer tâche</button>
+            }
+            @else {
+                <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Modifier tâche</button>
+            }
         </p>
     </form>
 </section>
