@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { TaskInfo } from './task';
 import { TaskDto } from './taskDto';
+import { SimpleTaskInfo } from './simpleTask';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,13 @@ export class TaskService {
 
   getTaskInfoById(id: number): Observable<TaskInfo> {
     return this.httpClient.get<TaskInfo>(this.endpoint + "/" + id)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getTaskInfoWithoutHistoryById(id: number): Observable<SimpleTaskInfo> {
+    return this.httpClient.get<SimpleTaskInfo>(this.endpoint + "/" + id + "/no-history")
     .pipe(
       catchError(this.handleError)
     )

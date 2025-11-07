@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { TaskDto } from '../taskDto';
 import { TaskPriority } from '../enums/taskPriority';
 import { TaskStatus } from '../enums/taskStatus';
@@ -33,7 +33,7 @@ export class TaskForm implements OnInit {
   taskForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(15)]),
-    endDate: new FormControl(moment([2025, 0, 1]), Validators.required),
+    endDate: new FormControl<Moment>(moment(), Validators.required),
     taskPriority: new FormControl<TaskPriority>(TaskPriority.MEDIUM, Validators.required),
     taskStatus: new FormControl<TaskStatus>(TaskStatus.NOT_STARTED, Validators.required),
   });
@@ -48,14 +48,13 @@ export class TaskForm implements OnInit {
     this.isAddMode = !this.id;
 
     if(!this.isAddMode) {
-      this.taskService.getTaskInfoById(this.id).subscribe({
+      this.taskService.getTaskInfoWithoutHistoryById(this.id).subscribe({
         next: (task)=>{
           task.endDate = new Date(task.endDate);
-          console.debug(task);
           this.taskForm.patchValue({
             name: task.name,
             description: task.description,
-            endDate: moment([task.endDate.getFullYear(), task.endDate.getMonth(), task.endDate.getDay()]),
+            endDate: moment(task.endDate),
             taskPriority: task.taskPriority,
             taskStatus: task.taskStatus
           });
@@ -81,7 +80,7 @@ export class TaskForm implements OnInit {
     this.isLoading = true;
     const name = this.taskForm.value.name ?? '';
     const description = this.taskForm.value.description ?? '';
-    const endDate = this.taskForm.value.endDate ?? new Date();
+    const endDate = this.taskForm.value.endDate ?? moment(new Date());
     const formattedDate = moment(endDate).format('YYYY-MM-DD HH:mm:ss') ?? '';
     const priority = this.taskForm.value.taskPriority ?? '';
     const status = this.taskForm.value.taskStatus ?? '';
