@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { ProjectInfo } from '../project';
+import { SimpleProjectInfo } from '../simpleProject';
 
 @Component({
   selector: 'app-project-card',
@@ -8,5 +8,5 @@ import { ProjectInfo } from '../project';
   styleUrl: './project-card.scss',
 })
 export class ProjectCard {
-  projectInfo = input.required<ProjectInfo>();
+  projectInfo = input.required<SimpleProjectInfo>();
 }

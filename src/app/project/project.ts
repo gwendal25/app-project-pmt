@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProjectInfo } from '../project';
 import { ProjectService } from '../project-service';
+import { SimpleProjectInfo } from '../simpleProject';
 
 @Component({
   selector: 'app-project',
@@ -9,7 +9,7 @@ import { ProjectService } from '../project-service';
   styleUrl: './project.scss',
 })
 export class Project implements OnInit {
-  projectInfoList: ProjectInfo[] = [];
+  projectInfoList: SimpleProjectInfo[] = [];
   projectService: ProjectService = inject(ProjectService);
 
   ngOnInit(): void {

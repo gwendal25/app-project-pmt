@@ -5,6 +5,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { ProjectDto } from './projectDto';
 import { TaskDto } from './taskDto';
 import { TaskInfo } from './task';
+import { SimpleProjectInfo } from './simpleProject';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class ProjectService {
     })
   }
 
-    getAllProjectInfos(): Observable<ProjectInfo[]> {
-      return this.httpClient.get<ProjectInfo[]>(this.endpoint);
+    getAllProjectInfos(): Observable<SimpleProjectInfo[]> {
+      return this.httpClient.get<SimpleProjectInfo[]>(this.endpoint);
     }
 
     getProjectInfoById(id: number): Observable<ProjectInfo> {
