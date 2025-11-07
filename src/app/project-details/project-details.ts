@@ -4,6 +4,8 @@ import { ProjectService } from '../project-service';
 import { ProjectInfo } from '../project';
 import { TaskPriority } from '../enums/taskPriority';
 import { TaskStatus } from '../enums/taskStatus';
+import { MatSelectChange } from '@angular/material/select';
+import { ProjectTaskInfo } from '../projectTask';
 
 @Component({
   selector: 'app-project-details',
@@ -17,6 +19,8 @@ export class ProjectDetails implements OnInit {
 
   id:number = this.route.snapshot.params['id'];
   projectInfo: ProjectInfo;
+  filteredTaskList: ProjectTaskInfo[] = []; 
+
   TaskPriority = TaskPriority;
   TaskStatus = TaskStatus;
 
@@ -28,6 +32,8 @@ export class ProjectDetails implements OnInit {
     this.projectService.getProjectInfoById(this.id)
     .subscribe((project) => {
       this.projectInfo = project;
+      this.projectInfo.tasks = this.projectInfo.tasks ?? [];
+      this.filteredTaskList = this.projectInfo.tasks;
     })
   }
 
@@ -37,5 +43,19 @@ export class ProjectDetails implements OnInit {
 
   getTaskPriorityValue(value: TaskPriority): string {
     return (<any>TaskPriority)[value] ?? "";
+  }
+
+  
+  filterTasks(event: MatSelectChange) {
+    if(event.value === null || event.value === undefined) {
+      this.filteredTaskList = this.projectInfo.tasks ?? [];
+      return;
+    }
+
+    let enumKey = event.value as keyof typeof TaskStatus;
+    let filteredTaskList = this.projectInfo.tasks?.filter((taskInfo) => 
+      enumKey.toString().includes(taskInfo.taskStatus.toString())
+    );
+    this.filteredTaskList = filteredTaskList ?? [];
   }
 }

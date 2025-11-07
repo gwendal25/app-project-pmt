@@ -8,7 +8,16 @@
         <a [routerLink]="['/project', projectInfo?.id, 'task-form']" matButton>Nouvelle tâche</a>
       </section>
       <section>
-        @for(taskInfo of projectInfo.tasks; track taskInfo.id) {
+            <p>
+              <mat-label>Status</mat-label>
+              <mat-select #status (selectionChange)="filterTasks($event)">
+                  <mat-option [value]="null">-</mat-option>
+                  @for (status of TaskStatus | keyvalue; track status) {
+                      <mat-option [value]="status.key">{{status.value}}</mat-option>
+                  }
+              </mat-select>
+          </p>
+        @for(taskInfo of filteredTaskList; track taskInfo.id) {
           <mat-card class="example-card" appearance="outlined">
             <mat-card-header>
               <mat-card-title>{{ taskInfo?.name }}</mat-card-title>
