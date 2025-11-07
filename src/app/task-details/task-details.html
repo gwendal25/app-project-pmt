@@ -11,6 +11,7 @@
         <mat-card class="example-card" appearance="outlined">
         <mat-card-header>
             <mat-card-title>{{ taskEntryInfo?.name }}</mat-card-title>
+            <mat-card-subtitle><small>Date de modification : {{ taskEntryInfo?.editDate | date:'dd/MM/yyyy h:mm:ss' }}</small></mat-card-subtitle>
             <mat-card-subtitle><small>Date d'échéance : {{ taskEntryInfo?.endDate | date:'dd/MM/yyyy' }}</small></mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>

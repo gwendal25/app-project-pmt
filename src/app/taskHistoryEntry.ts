@@ -5,7 +5,8 @@ export interface TaskHistoryEntryInfo {
     id: number;
     name: string;
     description: string;
-    endDate: string;
+    endDate: Date;
+    editDate: Date;
     taskPriority: TaskPriority,
     taskStatus: TaskStatus
 }
