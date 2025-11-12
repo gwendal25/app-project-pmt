@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProjectService } from '../project-service';
+import { ProjectService } from '../services/project-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import moment, { Moment } from 'moment';
-import { ProjectDto } from '../projectDto';
+import { ProjectDto } from '../interfaces/projectDto';
 
 @Component({
   selector: 'app-project-form',

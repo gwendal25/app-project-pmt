@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { SimpleProjectInfo } from '../simpleProject';
+import { SimpleProjectInfo } from '../interfaces/simpleProject';
 
 @Component({
   selector: 'app-project-card',

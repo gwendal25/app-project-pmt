@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { TaskInfo } from './task';
-import { TaskDto } from './taskDto';
-import { SimpleTaskInfo } from './simpleTask';
+import { TaskInfo } from '../interfaces/task';
+import { TaskDto } from '../interfaces/taskDto';
+import { SimpleTaskInfo } from '../interfaces/simpleTask';
 
 @Injectable({
   providedIn: 'root',

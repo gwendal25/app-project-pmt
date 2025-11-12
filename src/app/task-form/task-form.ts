@@ -3,12 +3,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment, { Moment } from 'moment';
-import { TaskDto } from '../taskDto';
+import { TaskDto } from '../interfaces/taskDto';
 import { TaskPriority } from '../enums/taskPriority';
 import { TaskStatus } from '../enums/taskStatus';
-import { ProjectService } from '../project-service';
-import { TaskPriorityLookup } from '../taskPriorityLookup';
-import { TaskService } from '../task-service';
+import { ProjectService } from '../services/project-service';
+import { TaskService } from '../services/task-service';
 
 @Component({
   selector: 'app-task-form',

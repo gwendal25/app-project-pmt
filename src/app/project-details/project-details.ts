@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../project-service';
-import { ProjectInfo } from '../project';
+import { ProjectService } from '../services/project-service';
+import { ProjectInfo } from '../interfaces/project';
 import { TaskPriority } from '../enums/taskPriority';
 import { TaskStatus } from '../enums/taskStatus';
 import { MatSelectChange } from '@angular/material/select';
-import { ProjectTaskInfo } from '../projectTask';
+import { ProjectTaskInfo } from '../interfaces/projectTask';
 
 @Component({
   selector: 'app-project-details',
