@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProjectService } from '../project-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { ProjectDto } from '../projectDto';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProjectForm implements OnInit {
   projectForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(15)]),
-    startDate: new FormControl(moment([2025, 0, 1]), Validators.required)
+    startDate: new FormControl<Moment>(moment(), Validators.required)
   });
 
   datePipe = new DatePipe('fr-FR');
@@ -42,7 +42,7 @@ export class ProjectForm implements OnInit {
           this.projectForm.patchValue({
             name: project.name,
             description: project.description,
-            startDate: moment([project.startDate.getFullYear(), project.startDate.getMonth(), project.startDate.getDay()])
+            startDate: moment(project.startDate)
           })
         },
         error: error => {
