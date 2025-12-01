@@ -1,19 +1,25 @@
 .listing-heading {
-  font-size: 16pt;
+  font-size: 20pt;
   font-weight: bold;
   margin-bottom: 5px;
 }
 .listing-small-heading {
-  font-size: 14pt;
+  font-size: 16pt;
   font-weight: normal;
-  margin-bottom: 5px;
+  margin-top: 0px;
+  margin-bottom: 2px;
+  text-align: left;
 }
 .listing-date {
-  margin-bottom: 5px;
+  margin-bottom: 2px;
 }
 .listing-description {
+  text-align: left;
   font-size: 12pt;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
+}
+.listing-details {
+  border: 2px solid #BADFDB;
 }
 label, input {
   display: block;
@@ -41,10 +47,45 @@ article {
   min-height: 100%;
 }
 
+section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  text-align: center;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.card-title {
+  text-align: left;
+}
+
+.card-content {
+  text-align: left;
+}
+
 .example-card {
-  max-width: 400px;
+  max-width: 300px;
+  min-height: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #89a5a2;
 }
 
 .example-card-footer {
   padding: 16px;
+}
+
+.example-button-row {
+  display:flexbox;
+}
+
+.example-button {
+  margin: 8px 8px 8px 0;
+  border-radius: 2px;
+  border: 2px solid #a0c0bd;
 }

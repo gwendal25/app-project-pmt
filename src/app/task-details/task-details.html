@@ -1,35 +1,35 @@
 <article>
     <section class="listing-details">
-    <h3 class="listing-heading">{{ taskInfo?.name }}</h3>
-    <small class="listing-date">Date d'échéance : {{ taskInfo?.endDate | date:'dd/MM/yyyy' }}</small>
-    <h5 class="listing-small-heading">Description</h5>
-    <p class="listing-description">{{ taskInfo?.description }}</p>
-    <a [routerLink]="['/project', projectId, 'task-form', taskInfo?.id]" matButton>Modifier</a>
+        <h3 class="listing-heading">{{ taskInfo?.name }}</h3>
+        <small class="listing-date">Date d'échéance : {{ taskInfo?.endDate | date:'dd/MM/yyyy' }}</small>
+        <h5 class="listing-small-heading">Description</h5>
+        <p class="listing-description">{{ taskInfo?.description }}</p>
+        <a [routerLink]="['/project', projectId, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
     </section>
     <section>
-    @for(taskEntryInfo of taskInfo.taskHistoryEntries; track taskEntryInfo.id) {
-        <mat-card class="example-card" appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>{{ taskEntryInfo?.name }}</mat-card-title>
-            <mat-card-subtitle><small>Date de modification : {{ taskEntryInfo?.editDate | date:'dd/MM/yyyy h:mm:ss' }}</small></mat-card-subtitle>
-            <mat-card-subtitle><small>Date d'échéance : {{ taskEntryInfo?.endDate | date:'dd/MM/yyyy' }}</small></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p>
-            {{ taskEntryInfo?.description }}
-            </p>
-        </mat-card-content>
-            <mat-card-footer class="example-card-footer">
-            <mat-chip-set aria-label="task traits">
-                @if(taskEntryInfo.taskStatus !== undefined){
-                <mat-chip>Statut : {{ getTaskStatusValue(taskEntryInfo.taskStatus) }}</mat-chip>
-                }
-                @if(taskEntryInfo.taskPriority !== undefined) {
-                <mat-chip>Priorité : {{ getTaskPriorityValue(taskEntryInfo.taskPriority) }}</mat-chip>
-                }
-                </mat-chip-set>
-            </mat-card-footer>
-        </mat-card>
-    }
+        <div class="card-container">
+            @for(taskEntryInfo of taskInfo.taskHistoryEntries; track taskEntryInfo.id) {
+            <mat-card class="example-card" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title class="card-title">{{ taskEntryInfo?.name }}</mat-card-title>
+                    <mat-card-subtitle><small>Date de modification : {{ taskEntryInfo?.editDate | date:'dd/MM/yyyy h:mm:ss' }}</small></mat-card-subtitle>
+                    <mat-card-subtitle><small>Date d'échéance : {{ taskEntryInfo?.endDate | date:'dd/MM/yyyy' }}</small></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content class="card-content">
+                    <p>{{ taskEntryInfo?.description }}</p>
+                </mat-card-content>
+                <mat-card-footer class="example-card-footer">
+                    <mat-chip-set aria-label="task traits">
+                    @if(taskEntryInfo.taskStatus !== undefined){
+                        <mat-chip>Statut : {{ getTaskStatusValue(taskEntryInfo.taskStatus) }}</mat-chip>
+                    }
+                    @if(taskEntryInfo.taskPriority !== undefined) {
+                        <mat-chip>Priorité : {{ getTaskPriorityValue(taskEntryInfo.taskPriority) }}</mat-chip>
+                    }
+                    </mat-chip-set>
+                </mat-card-footer>
+            </mat-card>
+            }
+        </div>
     </section>
 </article>
