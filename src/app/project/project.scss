@@ -3,11 +3,9 @@
   column-gap: 14px;
   row-gap: 14px;
   grid-template-columns: repeat(auto-fill, minmax(400px, 400px));
-  margin-top: 20px;
   justify-content: space-around;
-  background-color: #BADFDB;
   padding: 10pt;
-  min-height: 100%;
+  min-height:fit-content;
 }
 
 @media (min-width: 500px) and (max-width: 768px) {
