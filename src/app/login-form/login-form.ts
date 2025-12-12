@@ -2,23 +2,21 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserDto } from '../interfaces/userDto';
+import { UserLoginDto } from '../interfaces/userLoginDto';
 
 @Component({
-  selector: 'app-signin-form',
+  selector: 'app-login-form',
   standalone: false,
-  templateUrl: './signin-form.html',
-  styleUrl: './signin-form.scss',
+  templateUrl: './login-form.html',
+  styleUrl: './login-form.scss',
 })
-export class SigninForm {
+export class LoginForm {
   private router:Router = inject(Router);
   private authService:AuthService = inject(AuthService);
 
   userForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-    repeatPassword: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required])
   });
 
   isLoading: boolean = false;
@@ -29,27 +27,23 @@ export class SigninForm {
     }
 
     this.isLoading = true;
-    const name = this.userForm.value.name ?? '';
     const email = this.userForm.value.email ?? '';
     const password = this.userForm.value.password ?? '';
-    const repeatPassword = this.userForm.value.repeatPassword ?? '';
-    const userDto:UserDto = {
-      name: name,
+    const userDto:UserLoginDto = {
       email: email,
-      password: password,
-      repeatPassword: repeatPassword
+      password: password
     }; 
-    this.createUser(userDto);
+    this.login(userDto);
   }
 
-  createUser(userDto:UserDto) {
-    this.authService.createUser(userDto)
+  login(userDto:UserLoginDto) {
+    this.authService.login(userDto)
     .subscribe({
       next: () => {
-        this.router.navigate(['/login-form']);
+        this.router.navigate(['/']);
       },
       error: () => {
-        console.log("Error when creating the user");
+        console.log("Error during login");
         this.isLoading = false;
       }
     })

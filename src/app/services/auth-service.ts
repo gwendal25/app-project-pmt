@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { UserDto } from '../interfaces/userDto';
 import { User } from '../interfaces/user';
+import { UserLoginDto } from '../interfaces/userLoginDto';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,10 @@ export class AuthService {
 
   createUser(userDto: UserDto) {
     return this.httpClient.post<User>(this.endpoint, JSON.stringify(userDto), this.httpOptions);
+  }
+
+  login(userLoginDto: UserLoginDto) {
+    return this.httpClient.post<User>(this.endpoint + "/login", JSON.stringify(userLoginDto), this.httpOptions);
   }
 
   handleError(error:any) {

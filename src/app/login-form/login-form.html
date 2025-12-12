@@ -1,20 +1,6 @@
 <section class="listing-apply">
-    <h2 class="section-heading">Inscription</h2>
+    <h2 class="section-heading">Connexion</h2>
     <form [formGroup]="userForm" (submit)="submitUser()">
-        <mat-form-field class="example-full-width">
-            <mat-label>Nom</mat-label>
-            <input type="text" matInput required formControlName="name" placeholder="Ex. Jane Doe">
-            @if (userForm.get('name')?.hasError('required')) {
-                <mat-error>
-                    Le nom est <strong>obligatoire</strong>
-                </mat-error>
-            }
-            @if (userForm.get('name')?.hasError('minlength')) {
-                <mat-error>
-                    Le nom doit faire au moins <strong>5 charactères</strong>
-                </mat-error>
-            }
-        </mat-form-field>
         <p>
             <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
@@ -43,18 +29,7 @@
             </mat-form-field>
         </p>
         <p>
-            <mat-form-field class="example-full-width">
-                <mat-label>Répéter le mot de passe</mat-label>
-                <input type="password" matInput required placeholder="Ex. theRatIsSneaky69**" cols="50" rows="10" formControlName="repeatPassword">
-                @if (userForm.get('repeatPassword')?.hasError('required')) {
-                    <mat-error>
-                        Le mot de passe est <strong>obligatoire</strong>
-                    </mat-error>
-                }
-            </mat-form-field>
-        </p>
-        <p>
-            <button type="submit" matButton="filled" [disabled]="!userForm.valid">Inscription</button>
+            <button type="submit" matButton="filled" [disabled]="!userForm.valid">Connexion</button>
         </p>
     </form>
 </section>
