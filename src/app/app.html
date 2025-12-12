@@ -4,9 +4,14 @@
         <mat-icon>home</mat-icon>
       </a>
       <span>{{title}}</span>
-      <a [routerLink]="['/project-form']" mat-raised-button class="example-button"><mat-icon>create_new_folder</mat-icon> Nouveau projet</a>
-      <a [routerLink]="['/signin-form']" mat-raised-button class="example-button">Inscription</a>
-      <a [routerLink]="['/login-form']" mat-raised-button class="example-button">Connexion</a>
+      @if(isLoggedIn()) {
+        <a [routerLink]="['/project-form']" mat-raised-button class="example-button"><mat-icon>create_new_folder</mat-icon> Nouveau projet</a>
+        <button type="button" matButton="filled" (click)="logout()">Déconnexion</button>
+      }
+      @else {
+        <a [routerLink]="['/signin-form']" mat-raised-button class="example-button">Inscription</a>
+        <a [routerLink]="['/login-form']" mat-raised-button class="example-button">Connexion</a>
+      }
   </mat-toolbar>
   <section class="content">
       <router-outlet />

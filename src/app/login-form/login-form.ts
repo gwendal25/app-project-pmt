@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLoginDto } from '../interfaces/userLoginDto';
+import { User } from '../interfaces/user';
 
 @Component({
   selector: 'app-login-form',
@@ -39,7 +40,10 @@ export class LoginForm {
   login(userDto:UserLoginDto) {
     this.authService.login(userDto)
     .subscribe({
-      next: () => {
+      next: (user: User) => {
+        localStorage.setItem('fake-token', 'demo-token');
+        localStorage.setItem('email', user.email);
+        localStorage.setItem('name', user.name);
         this.router.navigate(['/']);
       },
       error: () => {

@@ -27,6 +27,16 @@ export class AuthService {
     return this.httpClient.post<User>(this.endpoint + "/login", JSON.stringify(userLoginDto), this.httpOptions);
   }
 
+  logout() {
+    localStorage.removeItem('fake-token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('name');
+  }
+
+  isLoggedIn() {
+    return !!localStorage.getItem('fake-token');
+  }
+
   handleError(error:any) {
     let errorMessage = '';
 
