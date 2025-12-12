@@ -31,6 +31,7 @@ import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import { TaskForm } from './task-form/task-form';
 import { TaskDetails } from './task-details/task-details';
+import { SigninForm } from './signin-form/signin-form';
 const moment = _rollupMoment || _moment;
 
 export const CUSTOM_DATE_FORMATS = {
@@ -53,7 +54,8 @@ export const CUSTOM_DATE_FORMATS = {
     ProjectDetails,
     ProjectForm,
     TaskForm,
-    TaskDetails
+    TaskDetails,
+    SigninForm
   ],
   imports: [
     BrowserModule,

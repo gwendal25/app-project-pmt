@@ -4,9 +4,11 @@ import { ProjectDetails } from "./project-details/project-details";
 import { ProjectForm } from "./project-form/project-form";
 import { TaskForm } from "./task-form/task-form";
 import { TaskDetails } from "./task-details/task-details";
+import { SigninForm } from "./signin-form/signin-form";
 
 const routeConfig: Routes = [
     { path: '', component: Project, title: 'Home page'},
+    { path: 'signin-form', component: SigninForm, title: 'Sign in'},
     { path: 'project-homepage', component: Project, title: 'Project home page' },
     { path: 'project-details/:id', component: ProjectDetails, title: 'Project details'},
     { path: 'project-form', component: ProjectForm, title: 'New project' },
