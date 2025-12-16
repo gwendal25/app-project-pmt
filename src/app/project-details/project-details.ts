@@ -6,6 +6,7 @@ import { TaskPriority } from '../enums/taskPriority';
 import { TaskStatus } from '../enums/taskStatus';
 import { MatSelectChange } from '@angular/material/select';
 import { ProjectTaskInfo } from '../interfaces/projectTask';
+import { TaskService } from '../services/task-service';
 
 @Component({
   selector: 'app-project-details',
@@ -16,6 +17,7 @@ import { ProjectTaskInfo } from '../interfaces/projectTask';
 export class ProjectDetails implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   projectService: ProjectService = inject(ProjectService);
+  taskService: TaskService = inject(TaskService);
 
   id:number = this.route.snapshot.params['id'];
   projectInfo: ProjectInfo;
@@ -25,7 +27,7 @@ export class ProjectDetails implements OnInit {
   TaskStatus = TaskStatus;
 
   constructor() {
-    this.projectInfo = { id: 0, name: "", description: "", startDate: new Date(), tasks: null };
+    this.projectInfo = { id: 0, name: "", description: "", startDate: new Date(), tasks: null, users: null };
   }
 
   ngOnInit(): void {
@@ -33,7 +35,11 @@ export class ProjectDetails implements OnInit {
     .subscribe((project) => {
       this.projectInfo = project;
       this.projectInfo.tasks = this.projectInfo.tasks ?? [];
+      this.projectInfo.users = this.projectInfo.users ?? [];
       this.filteredTaskList = this.projectInfo.tasks;
+      this.projectInfo.tasks.forEach((task:ProjectTaskInfo) => {
+        task.user = task.user ?? { id: -1, name: "" };
+      })
     })
   }
 
@@ -57,5 +63,18 @@ export class ProjectDetails implements OnInit {
       enumKey.toString().includes(taskInfo.taskStatus.toString())
     );
     this.filteredTaskList = filteredTaskList ?? [];
+  }
+
+  assignTask(taskId:number, event: MatSelectChange) {
+    if(event.value === null || event.value === undefined) {
+      return;
+    }
+    let userId:number = event.value;
+    this.taskService.assignTask(taskId, userId)
+    .subscribe({
+      next: () => {
+        console.log("successfully assigned task");
+      }
+    })
   }
 }

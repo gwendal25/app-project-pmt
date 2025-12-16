@@ -40,6 +40,15 @@
                 <mat-chip>Priorité : {{ getTaskPriorityValue(taskInfo.taskPriority) }}</mat-chip>
               }
             </mat-chip-set>
+            <mat-form-field appearance="fill">
+              <mat-label>Utilisateur assigné</mat-label>
+              <mat-select (selectionChange)="assignTask(taskInfo.id, $event)" [value]="taskInfo.user.id">
+                <mat-option [value]="-1">-</mat-option>
+                @for (user of projectInfo.users; track id) {
+                  <mat-option [value]="user.id">{{user.name}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
             <mat-card-actions>
               <a [routerLink]="['/project-details', projectInfo?.id, 'task-details', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>history</mat-icon> Historique</a>
               <a [routerLink]="['/project', projectInfo?.id, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>

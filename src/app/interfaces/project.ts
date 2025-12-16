@@ -1,4 +1,5 @@
 import { ProjectTaskInfo } from "./projectTask";
+import { User } from "./user";
 
 export interface ProjectInfo {
     id: number;
@@ -6,4 +7,5 @@ export interface ProjectInfo {
     description: string;
     startDate: Date;
     tasks: Array<ProjectTaskInfo> | null;
+    users: Array<User> | null;
 }

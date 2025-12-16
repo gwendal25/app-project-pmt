@@ -37,6 +37,10 @@ export class TaskService {
     return this.httpClient.put<TaskInfo>(this.endpoint + "/" + id, JSON.stringify(taskDto), this.httpOptions);
   }
 
+  assignTask(id:number, userId:number) {
+    return this.httpClient.put<TaskInfo>(this.endpoint + "/" + id + "/assign", JSON.stringify({id: userId}), this.httpOptions);
+  }
+
   handleError(error:any) {
     let errorMessage = '';
 
