@@ -1,5 +1,5 @@
-import { TaskPriority } from "../enums/taskPriority";
-import { TaskStatus } from "../enums/taskStatus";
+import { TaskPriority } from "../enums/TaskPriority";
+import { TaskStatus } from "../enums/TaskStatus";
 
 export interface TaskHistoryEntryInfo {
     id: number;

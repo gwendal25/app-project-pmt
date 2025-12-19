@@ -2,8 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../services/task-service';
 import { TaskInfo } from '../interfaces/task';
-import { TaskPriority } from '../enums/taskPriority';
-import { TaskStatus } from '../enums/taskStatus';
+import { TaskPriority } from '../enums/TaskPriority';
+import { TaskStatus } from '../enums/TaskStatus';
 
 @Component({
   selector: 'app-task-details',
