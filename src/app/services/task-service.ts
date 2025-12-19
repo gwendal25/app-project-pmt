@@ -5,6 +5,7 @@ import { TaskInfo } from '../interfaces/task';
 import { TaskDto } from '../interfaces/taskDto';
 import { SimpleTaskInfo } from '../interfaces/simpleTask';
 import { TaskNotificationDto } from '../interfaces/taskNotificationDto';
+import { TaskUserDto } from '../interfaces/taskUserDto';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +40,7 @@ export class TaskService {
   }
 
   assignTask(id:number, userId:number) {
-    return this.httpClient.put<TaskInfo>(this.endpoint + "/" + id + "/assign", JSON.stringify({id: userId}), this.httpOptions);
+    return this.httpClient.put<TaskUserDto>(this.endpoint + "/" + id + "/assign", JSON.stringify({userId: userId}), this.httpOptions);
   }
 
   setNotificationTask(id: number, isNotified: boolean) {

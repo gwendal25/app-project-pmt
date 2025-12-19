@@ -62,8 +62,7 @@ export class ProjectForm implements OnInit {
     const description = this.projectForm.value.description ?? '';
     const startDate = this.projectForm.value.startDate ?? new Date();
     const formattedDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss') ?? '';
-    const username = localStorage.getItem("name") ?? '';
-    const projectDto:ProjectDto = { name: name, description: description, startDate: formattedDate, username: username };
+    const projectDto:ProjectDto = { name: name, description: description, startDate: formattedDate };
 
     if(this.isAddMode) {
       this.createProject(projectDto);
