@@ -42,6 +42,7 @@ export class LoginForm {
     .subscribe({
       next: (user: User) => {
         localStorage.setItem('fake-token', 'demo-token');
+        localStorage.setItem('id', user.id.toString());
         localStorage.setItem('email', user.email);
         localStorage.setItem('name', user.name);
         this.router.navigate(['/']);

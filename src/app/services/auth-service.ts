@@ -29,6 +29,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('fake-token');
+    localStorage.removeItem('id');
     localStorage.removeItem('email');
     localStorage.removeItem('name');
   }

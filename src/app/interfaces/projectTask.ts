@@ -10,4 +10,5 @@ export interface ProjectTaskInfo {
     taskStatus: TaskStatus;
     endDate: Date;
     user: UserTaskDto;
+    notified: boolean;
 }

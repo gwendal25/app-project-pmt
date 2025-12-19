@@ -7,6 +7,7 @@ import { TaskStatus } from '../enums/TaskStatus';
 import { MatSelectChange } from '@angular/material/select';
 import { ProjectTaskInfo } from '../interfaces/projectTask';
 import { TaskService } from '../services/task-service';
+import { TaskNotificationDto } from '../interfaces/taskNotificationDto';
 
 @Component({
   selector: 'app-project-details',
@@ -74,6 +75,15 @@ export class ProjectDetails implements OnInit {
     .subscribe({
       next: () => {
         console.log("successfully assigned task");
+      }
+    })
+  }
+
+  updateNotificationStatus(taskId:number, update: boolean) {
+    this.taskService.setNotificationTask(taskId, update)
+    .subscribe({
+      next: (taskNotificationDto:TaskNotificationDto) => {
+        console.log("isNotified: "+ taskNotificationDto.isNotified);
       }
     })
   }

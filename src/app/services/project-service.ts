@@ -33,7 +33,7 @@ export class ProjectService {
     }
 
     submitProject(projectDto: ProjectDto) {
-      return this.httpClient.post<ProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
+      return this.httpClient.post<SimpleProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
     }
 
     createTask(id: number, taskDto: TaskDto) {
@@ -41,7 +41,7 @@ export class ProjectService {
     }
 
     updateProject(id: number, projectDto: ProjectDto) {
-      return this.httpClient.put<ProjectInfo>(this.endpoint + "/" + id, JSON.stringify(projectDto), this.httpOptions);
+      return this.httpClient.put<SimpleProjectInfo>(this.endpoint + "/" + id, JSON.stringify(projectDto), this.httpOptions);
     } 
 
     handleError(error:any) {

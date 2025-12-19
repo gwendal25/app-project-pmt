@@ -4,6 +4,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { TaskInfo } from '../interfaces/task';
 import { TaskDto } from '../interfaces/taskDto';
 import { SimpleTaskInfo } from '../interfaces/simpleTask';
+import { TaskNotificationDto } from '../interfaces/taskNotificationDto';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,10 @@ export class TaskService {
 
   assignTask(id:number, userId:number) {
     return this.httpClient.put<TaskInfo>(this.endpoint + "/" + id + "/assign", JSON.stringify({id: userId}), this.httpOptions);
+  }
+
+  setNotificationTask(id: number, isNotified: boolean) {
+    return this.httpClient.put<TaskNotificationDto>(this.endpoint + "/" + id + "/set-assign-notifications", JSON.stringify({ isNotified: isNotified }), this.httpOptions);
   }
 
   handleError(error:any) {

@@ -8,7 +8,7 @@ import { ProjectCard } from './project-card/project-card';
 import { ProjectDetails } from './project-details/project-details';
 import { ProjectForm } from './project-form/project-form';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 registerLocaleData(localeFr);
@@ -33,6 +33,8 @@ import { TaskForm } from './task-form/task-form';
 import { TaskDetails } from './task-details/task-details';
 import { SigninForm } from './signin-form/signin-form';
 import { LoginForm } from './login-form/login-form';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { AddHeaderInterceptor } from './interceptors/headerInterceptor';
 const moment = _rollupMoment || _moment;
 
 export const CUSTOM_DATE_FORMATS = {
@@ -73,14 +75,20 @@ export const CUSTOM_DATE_FORMATS = {
     MatInputModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptorsFromDi()),
     provideMomentDateAdapter(CUSTOM_DATE_FORMATS),
     { provide: LOCALE_ID, useValue: 'fr-FR'},
-    {provide: MAT_DATE_LOCALE, useValue: 'fr'}
+    {provide: MAT_DATE_LOCALE, useValue: 'fr'},
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AddHeaderInterceptor,
+    multi: true,
+  }
   ],
   bootstrap: [App]
 })
