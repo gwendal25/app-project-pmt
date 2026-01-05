@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
-import { ProjectInfo } from '../interfaces/project';
+import { ProjectInfo } from '../interfaces/project/project';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { ProjectDto } from '../interfaces/projectDto';
-import { TaskDto } from '../interfaces/taskDto';
-import { TaskInfo } from '../interfaces/task';
-import { SimpleProjectInfo } from '../interfaces/simpleProject';
+import { ProjectDto } from '../interfaces/project/projectDto';
+import { TaskDto } from '../interfaces/task/taskDto';
+import { TaskInfo } from '../interfaces/task/task';
+import { SimpleProjectInfo } from '../interfaces/project/simpleProject';
 
 @Injectable({
   providedIn: 'root'

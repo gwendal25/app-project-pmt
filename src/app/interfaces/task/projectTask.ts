@@ -1,6 +1,6 @@
-import { TaskPriority } from "../enums/TaskPriority";
-import { TaskStatus } from "../enums/TaskStatus";
-import { UserTaskDto } from "./userTaskDto";
+import { TaskPriority } from "../../enums/TaskPriority";
+import { TaskStatus } from "../../enums/TaskStatus";
+import { TaskUser } from "../user/taskUser";
 
 export interface ProjectTaskInfo {
     id: number;
@@ -9,6 +9,6 @@ export interface ProjectTaskInfo {
     taskPriority: TaskPriority;
     taskStatus: TaskStatus;
     endDate: Date;
-    user: UserTaskDto;
+    user: TaskUser;
     notified: boolean;
 }

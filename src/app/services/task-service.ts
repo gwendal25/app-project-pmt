@@ -1,11 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { TaskInfo } from '../interfaces/task';
-import { TaskDto } from '../interfaces/taskDto';
-import { SimpleTaskInfo } from '../interfaces/simpleTask';
-import { TaskNotificationDto } from '../interfaces/taskNotificationDto';
-import { TaskUserDto } from '../interfaces/taskUserDto';
+import { TaskInfo } from '../interfaces/task/task';
+import { TaskDto } from '../interfaces/task/taskDto';
+import { SimpleTaskInfo } from '../interfaces/task/simpleTask';
+import { TaskNotificationDto } from '../interfaces/task/taskNotificationDto';
+import { ProjectTaskInfo } from '../interfaces/task/projectTask';
 
 @Injectable({
   providedIn: 'root',
@@ -40,7 +40,7 @@ export class TaskService {
   }
 
   assignTask(id:number, userId:number) {
-    return this.httpClient.put<TaskUserDto>(this.endpoint + "/" + id + "/assign", JSON.stringify({userId: userId}), this.httpOptions);
+    return this.httpClient.put<ProjectTaskInfo>(this.endpoint + "/" + id + "/assign", JSON.stringify({userId: userId}), this.httpOptions);
   }
 
   setNotificationTask(id: number, isNotified: boolean) {

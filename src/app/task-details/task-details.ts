@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskService } from '../services/task-service';
-import { TaskInfo } from '../interfaces/task';
+import { TaskInfo } from '../interfaces/task/task';
 import { TaskPriority } from '../enums/TaskPriority';
 import { TaskStatus } from '../enums/TaskStatus';
 

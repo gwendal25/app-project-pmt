@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserLoginDto } from '../interfaces/userLoginDto';
-import { User } from '../interfaces/user';
+import { UserLoginDto } from '../interfaces/user/userLoginDto';
+import { User } from '../interfaces/user/user';
 
 @Component({
   selector: 'app-login-form',

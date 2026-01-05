@@ -1,4 +1,4 @@
-export interface UserTaskDto {
+export interface TaskUser {
     id: number;
     name: string;
 }

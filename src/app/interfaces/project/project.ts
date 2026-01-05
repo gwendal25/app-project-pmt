@@ -1,5 +1,5 @@
-import { ProjectTaskInfo } from "./projectTask";
-import { User } from "./user";
+import { ProjectTaskInfo } from "../task/projectTask";
+import { User } from "../user/user";
 
 export interface ProjectInfo {
     id: number;

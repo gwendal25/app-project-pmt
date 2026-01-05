@@ -1,13 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project-service';
-import { ProjectInfo } from '../interfaces/project';
+import { ProjectInfo } from '../interfaces/project/project';
 import { TaskPriority } from '../enums/TaskPriority';
 import { TaskStatus } from '../enums/TaskStatus';
 import { MatSelectChange } from '@angular/material/select';
-import { ProjectTaskInfo } from '../interfaces/projectTask';
+import { ProjectTaskInfo } from '../interfaces/task/projectTask';
 import { TaskService } from '../services/task-service';
-import { TaskNotificationDto } from '../interfaces/taskNotificationDto';
+import { TaskNotificationDto } from '../interfaces/task/taskNotificationDto';
 
 @Component({
   selector: 'app-project-details',
@@ -73,8 +73,9 @@ export class ProjectDetails implements OnInit {
     let userId:number = event.value;
     this.taskService.assignTask(taskId, userId)
     .subscribe({
-      next: () => {
-        console.log("successfully assigned task");
+      next: (projectTaskInfo: ProjectTaskInfo) => {
+        console.log(`successfully assigned task:`);
+        console.log(projectTaskInfo);
       }
     })
   }
@@ -83,7 +84,8 @@ export class ProjectDetails implements OnInit {
     this.taskService.setNotificationTask(taskId, update)
     .subscribe({
       next: (taskNotificationDto:TaskNotificationDto) => {
-        console.log("isNotified: "+ taskNotificationDto.isNotified);
+        console.log(`isNotified:`);
+        console.log(taskNotificationDto)
       }
     })
   }

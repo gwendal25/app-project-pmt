@@ -3,7 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment, { Moment } from 'moment';
-import { TaskDto } from '../interfaces/taskDto';
+import { TaskDto } from '../interfaces/task/taskDto';
 import { TaskPriority } from '../enums/TaskPriority';
 import { TaskStatus } from '../enums/TaskStatus';
 import { ProjectService } from '../services/project-service';

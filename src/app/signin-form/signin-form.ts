@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserDto } from '../interfaces/userDto';
+import { UserDto } from '../interfaces/user/userDto';
 
 @Component({
   selector: 'app-signin-form',

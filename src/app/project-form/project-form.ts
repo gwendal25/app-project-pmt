@@ -4,7 +4,7 @@ import { ProjectService } from '../services/project-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import moment, { Moment } from 'moment';
-import { ProjectDto } from '../interfaces/projectDto';
+import { ProjectDto } from '../interfaces/project/projectDto';
 
 @Component({
   selector: 'app-project-form',
