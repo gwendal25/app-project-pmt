@@ -35,6 +35,7 @@ import { SigninForm } from './signin-form/signin-form';
 import { LoginForm } from './login-form/login-form';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddHeaderInterceptor } from './interceptors/headerInterceptor';
+import { AddUserToProjectForm } from './add-user-to-project-form/add-user-to-project-form';
 const moment = _rollupMoment || _moment;
 
 export const CUSTOM_DATE_FORMATS = {
@@ -59,7 +60,8 @@ export const CUSTOM_DATE_FORMATS = {
     TaskForm,
     TaskDetails,
     SigninForm,
-    LoginForm
+    LoginForm,
+    AddUserToProjectForm
   ],
   imports: [
     BrowserModule,

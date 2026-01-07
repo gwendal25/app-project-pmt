@@ -7,6 +7,7 @@
     <div class="example-button-row">
       <a [routerLink]="['/project-form', projectInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
       <a [routerLink]="['/project', projectInfo?.id, 'task-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Nouvelle tâche</a>
+      <a [routerLink]="['/project', projectInfo?.id, 'add-user-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Ajouter un utilisateur</a>
     </div>
   </section>
   <section>

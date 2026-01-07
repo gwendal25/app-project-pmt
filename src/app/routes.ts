@@ -7,6 +7,7 @@ import { TaskDetails } from "./task-details/task-details";
 import { SigninForm } from "./signin-form/signin-form";
 import { LoginForm } from "./login-form/login-form";
 import { authGuard, notAuthGuard } from "./guards/auth-guard-guard";
+import { AddUserToProjectForm } from "./add-user-to-project-form/add-user-to-project-form";
 
 const routeConfig: Routes = [
     { path: '', component: Project, title: 'Home page', canActivate: [authGuard]},
@@ -16,6 +17,7 @@ const routeConfig: Routes = [
     { path: 'project-details/:id', component: ProjectDetails, title: 'Project details', canActivate: [authGuard]},
     { path: 'project-form', component: ProjectForm, title: 'New project', canActivate: [authGuard] },
     { path: 'project-form/:id', component: ProjectForm, title: 'Update project', canActivate: [authGuard] },
+    { path: 'project/:id/add-user-form', component: AddUserToProjectForm, title: 'Add user to project', canActivate: [authGuard] },
     { path: 'project/:projectid/task-form', component: TaskForm, title: 'Create task', canActivate: [authGuard] },
     { path: 'project/:projectid/task-form/:id', component: TaskForm, title: 'Update task', canActivate: [authGuard] },
     { path: 'project-details/:projectid/task-details/:id', component: TaskDetails, title: 'Task history', canActivate: [authGuard]},

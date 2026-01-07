@@ -6,6 +6,8 @@ import { ProjectDto } from '../interfaces/project/projectDto';
 import { TaskDto } from '../interfaces/task/taskDto';
 import { TaskInfo } from '../interfaces/task/task';
 import { SimpleProjectInfo } from '../interfaces/project/simpleProject';
+import { AddProjectUserDto } from '../interfaces/user/addProjectUserDto';
+import { ProjectUserDto } from '../interfaces/projectuser/projectUserDto';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +45,10 @@ export class ProjectService {
     updateProject(id: number, projectDto: ProjectDto) {
       return this.httpClient.put<SimpleProjectInfo>(this.endpoint + "/" + id, JSON.stringify(projectDto), this.httpOptions);
     } 
+
+    addUserToProject(id: number, addProjectUserDto: AddProjectUserDto) {
+      return this.httpClient.put<ProjectUserDto>(this.endpoint + "/" + id + "/add-user", JSON.stringify(addProjectUserDto), this.httpOptions);
+    }
 
     handleError(error:any) {
       let errorMessage = '';
