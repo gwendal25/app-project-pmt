@@ -8,6 +8,8 @@ import { TaskInfo } from '../interfaces/task/task';
 import { SimpleProjectInfo } from '../interfaces/project/simpleProject';
 import { AddProjectUserDto } from '../interfaces/user/addProjectUserDto';
 import { ProjectUserDto } from '../interfaces/projectuser/projectUserDto';
+import { ProjectUserRolesDto } from '../interfaces/project/projectUserRolesDto';
+import { ChangeUserRoleDto } from '../interfaces/user/changeUserRoleDto';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +36,13 @@ export class ProjectService {
       );
     }
 
+    getProjectInfoWithUserRolesById(id: number): Observable<ProjectUserRolesDto> {
+      return this.httpClient.get<ProjectUserRolesDto>(this.endpoint + "/" + id + "/user-roles")
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
+
     submitProject(projectDto: ProjectDto) {
       return this.httpClient.post<SimpleProjectInfo>(this.endpoint, JSON.stringify(projectDto), this.httpOptions);
     }
@@ -48,6 +57,10 @@ export class ProjectService {
 
     addUserToProject(id: number, addProjectUserDto: AddProjectUserDto) {
       return this.httpClient.put<ProjectUserDto>(this.endpoint + "/" + id + "/add-user", JSON.stringify(addProjectUserDto), this.httpOptions);
+    }
+
+    changeUserRole(id: number, changeUserRoleDto: ChangeUserRoleDto) {
+      return this.httpClient.put<ProjectUserDto>(this.endpoint + "/" + id + "/change-user-role", JSON.stringify(changeUserRoleDto), this.httpOptions);
     }
 
     handleError(error:any) {

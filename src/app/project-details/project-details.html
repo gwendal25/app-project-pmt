@@ -8,6 +8,7 @@
       <a [routerLink]="['/project-form', projectInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
       <a [routerLink]="['/project', projectInfo?.id, 'task-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Nouvelle tâche</a>
       <a [routerLink]="['/project', projectInfo?.id, 'add-user-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Ajouter un utilisateur</a>
+      <a [routerLink]="['/project', projectInfo?.id, 'user-roles-manager']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Gestion des rôles</a>
     </div>
   </section>
   <section>
