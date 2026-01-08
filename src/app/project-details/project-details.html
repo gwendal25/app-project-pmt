@@ -5,10 +5,15 @@
     <h5 class="listing-small-heading">Description</h5>
     <p class="listing-description">{{ projectInfo?.description }}</p>
     <div class="example-button-row">
-      <a [routerLink]="['/project-form', projectInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
-      <a [routerLink]="['/project', projectInfo?.id, 'task-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Nouvelle tâche</a>
-      <a [routerLink]="['/project', projectInfo?.id, 'add-user-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Ajouter un utilisateur</a>
-      <a [routerLink]="['/project', projectInfo?.id, 'user-roles-manager']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Gestion des rôles</a>
+      @if(isAdminOrMember(projectInfo.userRole)) {
+
+        <a [routerLink]="['/project-form', projectInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+        <a [routerLink]="['/project', projectInfo?.id, 'task-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Nouvelle tâche</a>
+      }
+      @if(isAdmin(projectInfo.userRole)) {
+        <a [routerLink]="['/project', projectInfo?.id, 'add-user-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Ajouter un utilisateur</a>
+        <a [routerLink]="['/project', projectInfo?.id, 'user-roles-manager']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Gestion des rôles</a>
+      }
     </div>
   </section>
   <section>
@@ -44,7 +49,7 @@
             </mat-chip-set>
             <mat-form-field appearance="fill">
               <mat-label>Utilisateur assigné</mat-label>
-              <mat-select (selectionChange)="assignTask(taskInfo.id, $event)" [value]="taskInfo.user.id">
+              <mat-select (selectionChange)="assignTask(taskInfo.id, $event)" [value]="taskInfo.user.id" [disabled]="!isAdminOrMember(projectInfo.userRole)">
                 <mat-option [value]="-1">-</mat-option>
                 @for (user of projectInfo.users; track id) {
                   <mat-option [value]="user.id">{{user.name}}</mat-option>
@@ -62,7 +67,9 @@
             </span>
             <mat-card-actions>
               <a [routerLink]="['/project-details', projectInfo?.id, 'task-details', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>history</mat-icon> Historique</a>
-              <a [routerLink]="['/project', projectInfo?.id, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+              @if(isAdminOrMember(projectInfo.userRole)) { 
+                <a [routerLink]="['/project', projectInfo?.id, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+              }
             </mat-card-actions>
           </mat-card-footer>
         </mat-card>

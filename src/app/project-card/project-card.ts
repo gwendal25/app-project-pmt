@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
-import { SimpleProjectInfo } from '../interfaces/project/simpleProject';
+import { ProjectUserRole } from '../interfaces/project/projectUserRole';
+import { UserRole } from '../enums/UserRole';
 
 @Component({
   selector: 'app-project-card',
@@ -8,5 +9,19 @@ import { SimpleProjectInfo } from '../interfaces/project/simpleProject';
   styleUrl: './project-card.scss',
 })
 export class ProjectCard {
-  projectInfo = input.required<SimpleProjectInfo>();
+  UserRole = UserRole;
+
+  projectInfo = input.required<ProjectUserRole>();
+
+  isAdmin(userRole: UserRole) {
+    return userRole === UserRole.ADMIN;
+  }
+
+  isMember(userRole: UserRole) {
+    return userRole === UserRole.MEMBER;
+  }
+
+  isAdminOrMember(userRole: UserRole) {
+    return this.isAdmin(userRole) || this.isMember(userRole);
+  }
 }

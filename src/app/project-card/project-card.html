@@ -10,6 +10,8 @@
   </mat-card-content>
   <mat-card-actions class="example-button-row">
     <a [routerLink]="['/project-details', projectInfo().id]" mat-raised-button class="example-button"><mat-icon>info</mat-icon> Détails</a>
-    <a [routerLink]="['/project-form', projectInfo().id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+    @if(isAdminOrMember(projectInfo().userRole)) {
+      <a [routerLink]="['/project-form', projectInfo().id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+    }
   </mat-card-actions>
 </mat-card>

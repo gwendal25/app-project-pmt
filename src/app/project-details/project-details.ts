@@ -8,6 +8,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { ProjectTaskInfo } from '../interfaces/task/projectTask';
 import { TaskService } from '../services/task-service';
 import { TaskNotificationDto } from '../interfaces/task/taskNotificationDto';
+import { UserRole } from '../enums/UserRole';
 
 @Component({
   selector: 'app-project-details',
@@ -24,11 +25,12 @@ export class ProjectDetails implements OnInit {
   projectInfo: ProjectInfo;
   filteredTaskList: ProjectTaskInfo[] = []; 
 
+  UserRole = UserRole;
   TaskPriority = TaskPriority;
   TaskStatus = TaskStatus;
 
   constructor() {
-    this.projectInfo = { id: 0, name: "", description: "", startDate: new Date(), tasks: null, users: null };
+    this.projectInfo = { id: 0, name: "", description: "", startDate: new Date(), userRole: UserRole.OBSERVER, tasks: null, users: null };
   }
 
   ngOnInit(): void {
@@ -42,6 +44,18 @@ export class ProjectDetails implements OnInit {
         task.user = task.user ?? { id: -1, name: "" };
       })
     })
+  }
+  
+  isAdmin(userRole: UserRole) {
+    return userRole === UserRole.ADMIN;
+  }
+
+  isMember(userRole: UserRole) {
+    return userRole === UserRole.MEMBER;
+  }
+
+  isAdminOrMember(userRole: UserRole) {
+    return this.isAdmin(userRole) || this.isMember(userRole);
   }
 
   getTaskStatusValue(value: TaskStatus): string {

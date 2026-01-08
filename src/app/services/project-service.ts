@@ -10,6 +10,7 @@ import { AddProjectUserDto } from '../interfaces/user/addProjectUserDto';
 import { ProjectUserDto } from '../interfaces/projectuser/projectUserDto';
 import { ProjectUserRolesDto } from '../interfaces/project/projectUserRolesDto';
 import { ChangeUserRoleDto } from '../interfaces/user/changeUserRoleDto';
+import { ProjectUserRole } from '../interfaces/project/projectUserRole';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class ProjectService {
       return this.httpClient.get<SimpleProjectInfo[]>(this.endpoint);
     }
 
-    getAllProjectInfosByUser(): Observable<SimpleProjectInfo[]> {
-      return this.httpClient.get<SimpleProjectInfo[]>(this.endpoint + "/all")
+    getAllProjectInfosByUser(): Observable<ProjectUserRole[]> {
+      return this.httpClient.get<ProjectUserRole[]>(this.endpoint + "/all")
       .pipe(
         catchError(this.handleError)
       );

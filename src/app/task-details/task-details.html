@@ -4,7 +4,6 @@
         <small class="listing-date">Date d'échéance : {{ taskInfo?.endDate | date:'dd/MM/yyyy' }}</small>
         <h5 class="listing-small-heading">Description</h5>
         <p class="listing-description">{{ taskInfo?.description }}</p>
-        <a [routerLink]="['/project', projectId, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
     </section>
     <section>
         <div class="card-container">
