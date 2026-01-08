@@ -13,7 +13,7 @@ export class Project implements OnInit {
   projectService: ProjectService = inject(ProjectService);
 
   ngOnInit(): void {
-    this.projectService.getAllProjectInfos()
+    this.projectService.getAllProjectInfosByUser()
     .subscribe((projects) => {
       this.projectInfoList = projects;
     })

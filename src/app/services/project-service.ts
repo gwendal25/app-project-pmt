@@ -29,6 +29,13 @@ export class ProjectService {
       return this.httpClient.get<SimpleProjectInfo[]>(this.endpoint);
     }
 
+    getAllProjectInfosByUser(): Observable<SimpleProjectInfo[]> {
+      return this.httpClient.get<SimpleProjectInfo[]>(this.endpoint + "/all")
+      .pipe(
+        catchError(this.handleError)
+      );
+    }
+
     getProjectInfoById(id: number): Observable<ProjectInfo> {
       return this.httpClient.get<ProjectInfo>(this.endpoint + "/" + id)
       .pipe(
