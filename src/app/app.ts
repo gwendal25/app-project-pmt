@@ -13,6 +13,7 @@ export class App {
   title = "App projet PMT"
   router:Router = inject(Router);
   authService = inject(AuthService);
+  username = localStorage.getItem("name");
 
   isLoggedIn() {
     return this.authService.isLoggedIn();

@@ -6,6 +6,7 @@
       <span>{{title}}</span>
       @if(isLoggedIn()) {
         <a [routerLink]="['/project-form']" mat-raised-button class="example-button"><mat-icon>create_new_folder</mat-icon> Nouveau projet</a>
+        <span class="username-span">{{username}}</span>
         <button type="button" matButton="filled" (click)="logout()">Déconnexion</button>
       }
       @else {
