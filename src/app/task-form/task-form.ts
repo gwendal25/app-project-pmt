@@ -4,8 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import moment, { Moment } from 'moment';
 import { TaskDto } from '../interfaces/task/taskDto';
-import { TaskPriority } from '../enums/TaskPriority';
-import { TaskStatus } from '../enums/TaskStatus';
+import { TaskPriority } from '../enums/taskPriority';
+import { TaskStatus } from '../enums/taskStatus';
 import { ProjectService } from '../services/project-service';
 import { TaskService } from '../services/task-service';
 
