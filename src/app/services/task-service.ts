@@ -43,6 +43,10 @@ export class TaskService {
     return this.httpClient.put<ProjectTaskInfo>(this.endpoint + "/" + id + "/assign", JSON.stringify({userId: userId}), this.httpOptions);
   }
 
+  unassignTask(id: number) {
+    return this.httpClient.put<ProjectTaskInfo>(this.endpoint + "/" + id + "/unassign", this.httpOptions);
+  }
+
   setNotificationTask(id: number, isNotified: boolean) {
     return this.httpClient.put<TaskNotificationDto>(this.endpoint + "/" + id + "/set-assign-notifications", JSON.stringify({ isNotified: isNotified }), this.httpOptions);
   }

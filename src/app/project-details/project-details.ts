@@ -85,13 +85,23 @@ export class ProjectDetails implements OnInit {
       return;
     }
     let userId:number = event.value;
-    this.taskService.assignTask(taskId, userId)
-    .subscribe({
-      next: (projectTaskInfo: ProjectTaskInfo) => {
-        console.log(`successfully assigned task:`);
-        console.log(projectTaskInfo);
-      }
-    })
+    if(userId !== -1) {
+      this.taskService.assignTask(taskId, userId)
+      .subscribe({
+        next: (projectTaskInfo: ProjectTaskInfo) => {
+          console.log(`successfully assigned task:`);
+          console.log(projectTaskInfo);
+        }
+      })
+    } else {
+      this.taskService.unassignTask(taskId)
+      .subscribe({
+        next: (projectTaskInfo: ProjectTaskInfo) => {
+          console.log("sucessfully unassigned task:");
+          console.log(projectTaskInfo);
+        }
+      })
+    }
   }
 
   updateNotificationStatus(taskId:number, update: boolean) {
