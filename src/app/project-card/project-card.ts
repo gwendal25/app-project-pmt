@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
 import { ProjectUserRole } from '../interfaces/project/projectUserRole';
-import { UserRole } from '../enums/UserRole';
+import { UserRole } from '../enums/userRole';
 
 @Component({
   selector: 'app-project-card',

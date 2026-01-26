@@ -8,7 +8,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { ProjectTaskInfo } from '../interfaces/task/projectTask';
 import { TaskService } from '../services/task-service';
 import { TaskNotificationDto } from '../interfaces/task/taskNotificationDto';
-import { UserRole } from '../enums/UserRole';
+import { UserRole } from '../enums/userRole';
 
 @Component({
   selector: 'app-project-details',

@@ -1,4 +1,4 @@
-import { UserRole } from "../../enums/UserRole";
+import { UserRole } from "../../enums/userRole";
 import { ProjectTaskInfo } from "../task/projectTask";
 import { User } from "../user/user";
 

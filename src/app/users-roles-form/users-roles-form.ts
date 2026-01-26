@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../services/project-service';
 import { ProjectUserRolesDto } from '../interfaces/project/projectUserRolesDto';
-import { UserRole } from '../enums/UserRole';
+import { UserRole } from '../enums/userRole';
 import { MatSelectChange } from '@angular/material/select';
 import { UserRoleDto } from '../interfaces/user/userRoleDto';
 import { ChangeUserRoleDto } from '../interfaces/user/changeUserRoleDto';

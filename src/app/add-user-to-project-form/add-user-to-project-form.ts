@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserRole } from '../enums/UserRole';
+import { UserRole } from '../enums/userRole';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../services/project-service';
 import { AddProjectUserDto } from '../interfaces/user/addProjectUserDto';
