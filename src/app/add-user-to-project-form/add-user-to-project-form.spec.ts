@@ -3,7 +3,7 @@ import { AddUserToProjectForm } from './add-user-to-project-form';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ProjectService } from '../services/project-service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -26,11 +26,6 @@ describe('AddUserToProjectForm', () => {
     };
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     projectServiceSpy = jasmine.createSpyObj('ProjectService', ['addUserToProject']);
-    projectServiceSpy.addUserToProject.and.returnValue(of({
-      project: { id: 1, name: 'Test Project', description: 'Test Description', startDate: new Date() },
-      user: { id: 1, name: 'User 1', email: 'user1@example.com' },
-      role: 'OBSERVER'
-    }));
 
     await TestBed.configureTestingModule({
       imports: [
@@ -57,5 +52,33 @@ describe('AddUserToProjectForm', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not submit if form is invalid', () => {
+    spyOn(component, 'addUserToProject');
+    component.userForm.setValue({ email: '', userRole: UserRole.OBSERVER});
+    component.submitForm();
+    expect(component.addUserToProject).not.toHaveBeenCalled();
+  })
+
+  it('should call addUserToProject with valid form', () => {
+    const addProjectUserDto = { email: 'test@example.com', userRole: UserRole.OBSERVER };
+    projectServiceSpy.addUserToProject.and.returnValue(of({
+      project: { id: 1, name: 'Test Project', description: 'Test Description', startDate: new Date() },
+      user: { id: 1, name: 'User 1', email: 'user1@example.com' },
+      role: 'OBSERVER'
+    }));
+    component.userForm.setValue(addProjectUserDto);
+    component.submitForm();
+    expect(projectServiceSpy.addUserToProject).toHaveBeenCalledWith(1, addProjectUserDto);
+  })
+
+  it('should handle submit error', () => {
+    const addProjectUserDto = { email: 'test@example.com', userRole: UserRole.OBSERVER };
+    projectServiceSpy.addUserToProject.and.returnValue(throwError(() => new Error('fail')));
+    component.userForm.setValue(addProjectUserDto);
+    component.submitForm();
+    expect(component.isLoading).toBeFalse();
+  })
 });
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';import { UserRole } from '../enums/userRole';
+

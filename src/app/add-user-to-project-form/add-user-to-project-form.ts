@@ -43,7 +43,11 @@ export class AddUserToProjectForm implements OnInit {
       email: email,
       userRole: userRole
     }
+    
+    this.addUserToProject(addprojectUserDto);    
+  }
 
+  addUserToProject(addprojectUserDto: AddProjectUserDto) {
     this.projectService.addUserToProject(this.id, addprojectUserDto)
     .subscribe({
       next: (projectUserDto: ProjectUserDto) => {
