@@ -20,7 +20,7 @@
     <p>
       <mat-form-field appearance="fill">
         <mat-label>Filtre status</mat-label>
-        <mat-select #status (selectionChange)="filterTasks($event)">
+        <mat-select #status (selectionChange)="filterTasks($event.value)">
           <mat-option [value]="null">-</mat-option>
           @for (status of TaskStatus | keyvalue; track status) {
             <mat-option [value]="status.key">{{status.value}}</mat-option>
@@ -49,7 +49,7 @@
             </mat-chip-set>
             <mat-form-field appearance="fill">
               <mat-label>Utilisateur assigné</mat-label>
-              <mat-select (selectionChange)="assignTask(taskInfo.id, $event)" [value]="taskInfo.user.id" [disabled]="!isAdminOrMember(projectInfo.userRole)">
+              <mat-select (selectionChange)="onUserAssignedSelected(taskInfo.id, $event.value)" [value]="taskInfo.user.id" [disabled]="!isAdminOrMember(projectInfo.userRole)">
                 <mat-option [value]="-1">-</mat-option>
                 @for (user of projectInfo.users; track id) {
                   <mat-option [value]="user.id">{{user.name}}</mat-option>

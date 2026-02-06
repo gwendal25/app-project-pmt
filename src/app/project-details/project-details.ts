@@ -67,41 +67,55 @@ export class ProjectDetails implements OnInit {
   }
 
   
-  filterTasks(event: MatSelectChange) {
-    if(event.value === null || event.value === undefined) {
+  filterTasks(taskStatus: TaskStatus) {
+    if(taskStatus === null || taskStatus === undefined) {
       this.filteredTaskList = this.projectInfo.tasks ?? [];
       return;
     }
-
-    let enumKey = event.value as keyof typeof TaskStatus;
     let filteredTaskList = this.projectInfo.tasks?.filter((taskInfo) => 
-      enumKey.toString().includes(taskInfo.taskStatus.toString())
+      taskStatus.toString().includes(taskInfo.taskStatus.toString())
     );
     this.filteredTaskList = filteredTaskList ?? [];
   }
 
-  assignTask(taskId:number, event: MatSelectChange) {
-    if(event.value === null || event.value === undefined) {
+  onUserAssignedSelected(taskId:number, userId: number) {
+    if(userId === null || userId === undefined) {
       return;
     }
-    let userId:number = event.value;
     if(userId !== -1) {
-      this.taskService.assignTask(taskId, userId)
+      this.assignTask(taskId, userId);
+    }
+    else {
+      this.unassignTask(taskId);
+    }
+   }
+
+  assignTask(taskId:number, userId:number) {
+    this.taskService.assignTask(taskId, userId)
       .subscribe({
         next: (projectTaskInfo: ProjectTaskInfo) => {
           console.log(`successfully assigned task:`);
           console.log(projectTaskInfo);
+        },
+        error: (error) => {
+          console.log("Error during task assignment:");
+          console.log(error);
         }
-      })
-    } else {
-      this.taskService.unassignTask(taskId)
+      });
+  }
+
+  unassignTask(taskId:number) {
+    this.taskService.unassignTask(taskId)
       .subscribe({
         next: (projectTaskInfo: ProjectTaskInfo) => {
           console.log("sucessfully unassigned task:");
           console.log(projectTaskInfo);
-        }
-      })
-    }
+        },
+        error: (error) => {
+          console.log("Error during task unassignment:");
+          console.log(error);
+        } 
+      });
   }
 
   updateNotificationStatus(taskId:number, update: boolean) {
@@ -110,6 +124,10 @@ export class ProjectDetails implements OnInit {
       next: (taskNotificationDto:TaskNotificationDto) => {
         console.log(`isNotified:`);
         console.log(taskNotificationDto)
+      },
+      error: (error) => {
+        console.log("Error during notification update:");
+        console.log(error);
       }
     })
   }
