@@ -54,7 +54,7 @@
             </mat-form-field>
         </p>
         <p>
-            <button type="submit" matButton="filled" [disabled]="!userForm.valid">Inscription</button>
+            <button type="submit" matButton="filled" [disabled]="!userForm.valid || isLoading">Inscription</button>
         </p>
     </form>
 </section>

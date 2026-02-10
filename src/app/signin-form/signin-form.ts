@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserDto } from '../interfaces/user/userDto';
+import { User } from '../interfaces/user/user';
 
 @Component({
   selector: 'app-signin-form',
@@ -45,7 +46,8 @@ export class SigninForm {
   createUser(userDto:UserDto) {
     this.authService.createUser(userDto)
     .subscribe({
-      next: () => {
+      next: (user: User) => {
+        console.log(user);
         this.router.navigate(['/login-form']);
       },
       error: () => {
