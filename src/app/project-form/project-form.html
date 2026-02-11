@@ -50,10 +50,10 @@
         </mat-form-field>
         <p>
             @if(isAddMode) {
-                <button type="submit" matButton="filled" [disabled]="!projectForm.valid">Créer projet</button>
+                <button type="submit" matButton="filled" [disabled]="!projectForm.valid || isLoading">Créer projet</button>
             }
             @else {
-                <button type="submit" matButton="filled" [disabled]="!projectForm.valid">Modifier projet</button>
+                <button type="submit" matButton="filled" [disabled]="!projectForm.valid || isLoading">Modifier projet</button>
             }
         </p>
     </form>

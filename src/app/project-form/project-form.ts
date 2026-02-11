@@ -20,7 +20,7 @@ export class ProjectForm implements OnInit {
   projectForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(5)]),
     description: new FormControl('', [Validators.required, Validators.minLength(15)]),
-    startDate: new FormControl<Moment>(moment(), Validators.required)
+    startDate: new FormControl<Moment>(moment(), [Validators.required])
   });
 
   datePipe = new DatePipe('fr-FR');
@@ -45,23 +45,32 @@ export class ProjectForm implements OnInit {
             startDate: moment(project.startDate)
           })
         },
-        error: error => {
-          console.log(error);
+        error: () => {
+          console.log("Error when updating the project");
         }
       })
     }
   }
 
   submitProject() {
-    if(!this.projectForm.valid) {
+    if(this.projectForm.get("name")?.hasError("required") || this.projectForm.get("name")?.hasError("minlength")) {
+      console.log("Le nom du projet est invalide");
+      return;
+    }
+    if(this.projectForm.get("description")?.hasError("required") || this.projectForm.get("description")?.hasError("minlength")) {
+      console.log("La description du projet est invalide");
+      return;
+    }
+    if(this.projectForm.get("startDate")?.hasError("required")) {
+      console.log("La date de début est requise");
       return;
     }
 
     this.isLoading = true;
     const name = this.projectForm.value.name ?? '';
     const description = this.projectForm.value.description ?? '';
-    const startDate = this.projectForm.value.startDate ?? new Date();
-    const formattedDate = moment(startDate).format('YYYY-MM-DD HH:mm:ss') ?? '';
+    const startDate = this.projectForm.value.startDate?? moment(new Date());
+    const formattedDate = startDate.format('YYYY-MM-DD HH:mm:ss') ?? '';
     const projectDto:ProjectDto = { name: name, description: description, startDate: formattedDate };
 
     if(this.isAddMode) {
