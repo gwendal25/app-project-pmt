@@ -82,10 +82,10 @@
         </p>
         <p>
             @if(isAddMode) {
-                <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Créer tâche</button>
+                <button type="submit" matButton="filled" [disabled]="!taskForm.valid || isLoading">Créer tâche</button>
             }
             @else {
-                <button type="submit" matButton="filled" [disabled]="!taskForm.valid">Modifier tâche</button>
+                <button type="submit" matButton="filled" [disabled]="!taskForm.valid || isLoading">Modifier tâche</button>
             }
         </p>
     </form>

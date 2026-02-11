@@ -57,6 +57,9 @@ export class TaskForm implements OnInit {
             taskPriority: task.taskPriority,
             taskStatus: task.taskStatus
           });
+        },
+        error: () => {
+          console.log("Error when getting the task info without history");
         }
       })
     } else {
@@ -68,11 +71,24 @@ export class TaskForm implements OnInit {
   }
 
   submitTask() {
-    if(!this.taskForm.valid) {
+    if(this.taskForm.get("name")?.hasError("required") || this.taskForm.get("name")?.hasError("minlength")) {
+      console.log("Le nom du projet est invalide")
       return;
     }
-
-    if(this.isLoading) {
+    if(this.taskForm.get("description")?.hasError("required") || this.taskForm.get("description")?.hasError("minlength")) {
+      console.log("la description du projet est invalide");
+      return;
+    }
+    if(this.taskForm.get("endDate")?.hasError("required")) {
+      console.log("La date de fin est invalide");
+      return;
+    }
+    if(this.taskForm.get("taskPriority")?.hasError("required")) {
+      console.log("La priorité est requise");
+      return;
+    }
+    if(this.taskForm.get("taskStatus")?.hasError("required")) {
+      console.log("Le status est requis");
       return;
     }
 
@@ -80,7 +96,7 @@ export class TaskForm implements OnInit {
     const name = this.taskForm.value.name ?? '';
     const description = this.taskForm.value.description ?? '';
     const endDate = this.taskForm.value.endDate ?? moment(new Date());
-    const formattedDate = moment(endDate).format('YYYY-MM-DD HH:mm:ss') ?? '';
+    const formattedDate = endDate.format('YYYY-MM-DD HH:mm:ss') ?? '';
     const priority = this.taskForm.value.taskPriority ?? '';
     const status = this.taskForm.value.taskStatus ?? '';
     const taskDto: TaskDto = {
@@ -90,9 +106,6 @@ export class TaskForm implements OnInit {
       taskPriority: priority,
       taskStatus: status
     }
-
-    console.log(this.taskForm.value.taskPriority);
-    console.log(this.taskForm.value.taskStatus);
 
     if(this.isAddMode) {
       this.createTask(this.projectId, taskDto);
