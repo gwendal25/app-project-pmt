@@ -29,7 +29,7 @@
             </mat-form-field>
         </p>
         <p>
-            <button type="submit" matButton="filled" [disabled]="!userForm.valid">Connexion</button>
+            <button type="submit" matButton="filled" [disabled]="!userForm.valid || isLoading">Connexion</button>
         </p>
     </form>
 </section>
