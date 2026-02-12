@@ -60,9 +60,30 @@ describe('TaskFormCreate', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not submit if form is invalid', () => {
+  it('should not submit if name is invalid', () => {
     spyOn(component, 'createTask');
-    component.taskForm.setValue({ name: '', description: '', endDate: moment(new Date()), taskPriority: TaskPriority.MEDIUM, taskStatus: TaskStatus.NOT_STARTED})
+    component.taskForm.setValue({ name: '', description: 'Prepare the terrain for the new factory', endDate: moment(new Date(2010, 1, 1)), taskPriority: TaskPriority.MEDIUM, taskStatus: TaskStatus.NOT_STARTED})
+    component.submitTask();
+    expect(component.createTask).not.toHaveBeenCalled();
+  })
+
+  it('should not submit if description is invalid', () => {
+    spyOn(component, 'createTask');
+    component.taskForm.setValue({ name: 'Prepare terrain', description: '', endDate: moment(new Date(2010, 1, 1)), taskPriority: TaskPriority.MEDIUM, taskStatus: TaskStatus.NOT_STARTED})
+    component.submitTask();
+    expect(component.createTask).not.toHaveBeenCalled();
+  })
+
+  it('should not submit if task priority is invalid', () => {
+    spyOn(component, 'createTask');
+    component.taskForm.setValue({ name: 'Prepare terrain', description: 'Prepare the terrain for the new factory', endDate: moment(new Date(2010, 1, 1)), taskPriority: null, taskStatus: TaskStatus.NOT_STARTED})
+    component.submitTask();
+    expect(component.createTask).not.toHaveBeenCalled();
+  })
+
+  it('should not submit if task status is invalid', () => {
+    spyOn(component, 'createTask');
+    component.taskForm.setValue({ name: 'Prepare terrain', description: 'Prepare the terrain for the new factory', endDate: moment(new Date(2010, 1, 1)), taskPriority: TaskPriority.MEDIUM, taskStatus: null })
     component.submitTask();
     expect(component.createTask).not.toHaveBeenCalled();
   })
@@ -118,14 +139,6 @@ describe('TaskFormUpdate', () => {
     };
     const taskSpy = jasmine.createSpyObj('TaskService', ['getTaskInfoWithoutHistoryById', 'updateTask']);
     const projectSpy = jasmine.createSpyObj('ProjectService', ['createTask']);
-    taskSpy.getTaskInfoWithoutHistoryById.and.returnValue(of({
-      id: 1,
-      name: 'Prepare terrain',
-      description: 'Prepare the terrain for the new factory',
-      endDate: new Date(2010, 1, 1),
-      taskPriority: TaskPriority.MEDIUM,
-      taskStatus: TaskStatus.NOT_STARTED
-    }));
 
     await TestBed.configureTestingModule({
       imports: [
@@ -149,6 +162,17 @@ describe('TaskFormUpdate', () => {
     fixture = TestBed.createComponent(TaskForm);
     component = fixture.componentInstance;
     taskServiceSpy = TestBed.inject(TaskService) as jasmine.SpyObj<TaskService>;
+
+    const taskDto = {
+      id: 1,
+      name: 'Prepare terrain',
+      description: 'Prepare the terrain for the new factory',
+      endDate: new Date(2010, 1, 1),
+      taskPriority: TaskPriority.MEDIUM,
+      taskStatus: TaskStatus.NOT_STARTED
+    };
+    taskServiceSpy.getTaskInfoWithoutHistoryById.and.returnValue(of(taskDto));
+
     fixture.detectChanges();
   });
 

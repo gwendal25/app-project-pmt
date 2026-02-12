@@ -60,6 +60,10 @@ export class TaskForm implements OnInit {
         },
         error: () => {
           console.log("Error when getting the task info without history");
+          this.taskForm.patchValue({
+            taskPriority: null,
+            taskStatus: null
+          })
         }
       })
     } else {
