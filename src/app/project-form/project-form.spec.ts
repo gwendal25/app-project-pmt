@@ -150,6 +150,20 @@ describe('ProjectFormUpdate', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should not submit if form is invalid', () => {
+    spyOn(component, 'updateProject');
+    component.projectForm.setValue({ name: '', description: 'Test factory in the new eridu', startDate: moment()})
+    component.submitProject();
+    expect(component.updateProject).not.toHaveBeenCalled();
+  });
+
+  it('should not submit if description is invalid', () => {
+    spyOn(component, 'updateProject');
+    component.projectForm.setValue({ name: 'Test project', description: '', startDate: moment()})
+    component.submitProject();
+    expect(component.updateProject).not.toHaveBeenCalled();
+  });
+
   it('should update project with valid form', () => {
     const updatedProjectDto: SimpleProjectInfo = {
       id: 1,
