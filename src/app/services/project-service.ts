@@ -16,7 +16,7 @@ import { ProjectUserRole } from '../interfaces/project/projectUserRole';
   providedIn: 'root'
 })
 export class ProjectService {
-  endpoint = 'http://localhost:8081/projects';
+  endpoint = 'http://localhost:8081/api/projects';
   private httpClient:HttpClient = inject(HttpClient);
 
   httpOptions = {
