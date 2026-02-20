@@ -1,0 +1,5 @@
+<section class="results">
+    @for(projectInfo of projectInfoList; track $index) {
+        <app-project-card [projectInfo]="projectInfo"></app-project-card>
+    }
+</section>

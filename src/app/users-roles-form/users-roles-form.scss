@@ -1,0 +1,76 @@
+.listing-heading {
+  font-size: 20pt;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.listing-small-heading {
+  font-size: 16pt;
+  font-weight: normal;
+  margin-bottom: 2px;
+  text-align: left;
+}
+.listing-date {
+  margin-bottom: 2px;
+}
+
+.listing-details {
+  border: 2px solid #BADFDB;
+}
+
+label, input {
+  display: block;
+}
+label {
+  color: #FFA4A4;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12pt;
+}
+input {
+  font-size: 16pt;
+  margin-bottom: 15px;
+  padding: 10px;
+  width: 400px;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: solid .3px;
+}
+
+article {
+  padding: 20pt;
+  height: 100%;
+}
+
+section {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  text-align: center;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.example-card {
+  max-width: 300px;
+  min-height: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #89a5a2;
+}
+
+.card-title {
+  text-align: left;
+}
+
+.card-content {
+  text-align: left;
+}
+
+.example-card-footer {
+  padding: 16px;
+}

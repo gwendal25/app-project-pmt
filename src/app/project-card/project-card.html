@@ -1,0 +1,17 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title class="card-title">{{projectInfo().name}} </mat-card-title>
+    <mat-card-subtitle class="card-date"><small>Date de début : {{projectInfo().startDate | date:'dd/MM/yyyy'}}</small></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{projectInfo().description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="example-button-row">
+    <a [routerLink]="['/project-details', projectInfo().id]" mat-raised-button class="example-button"><mat-icon>info</mat-icon> Détails</a>
+    @if(isAdminOrMember(projectInfo().userRole)) {
+      <a [routerLink]="['/project-form', projectInfo().id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+    }
+  </mat-card-actions>
+</mat-card>

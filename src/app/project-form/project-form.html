@@ -1,0 +1,60 @@
+<section class="listing-apply">
+    @if(isAddMode) {
+        <h2 class="section-heading">Créer un nouveau projet</h2>
+    }
+    @else {
+        <h2 class="section-heading">Modifier un projet</h2>
+    }
+    <form [formGroup]="projectForm" (submit)="submitProject()">
+        <mat-form-field class="example-full-width">
+            <mat-label>Nom</mat-label>
+            <input type="text" matInput required formControlName="name" placeholder="Ex. Projet de factory">
+            @if (projectForm.get('name')?.hasError('required')) {
+                <mat-error>
+                    Le nom du projet est <strong>obligatoire</strong>
+                </mat-error>
+            }
+            @if (projectForm.get('name')?.hasError('minlength')) {
+                <mat-error>
+                    Le nom du projet doit faire au moins <strong>5 charactères</strong>
+                </mat-error>
+            }
+        </mat-form-field>
+        <p>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <textarea matInput required placeholder="Ex. La factory doit continuer de grandir..." cols="50" rows="10" formControlName="description"></textarea>
+                @if (projectForm.get('description')?.hasError('required')) {
+                    <mat-error>
+                        La description du projet est <strong>obligatoire</strong>
+                    </mat-error>
+                }
+                @if (projectForm.get('description')?.hasError('minlength')) {
+                <mat-error>
+                    La description du projet doit faire au moins <strong>15 charactères</strong>
+                </mat-error>
+            }
+            </mat-form-field>
+        </p>
+        <mat-form-field class="example-full-width">
+            <mat-label>Date de départ</mat-label>
+            <input matInput required [matDatepicker]="picker" formControlName="startDate">
+            <mat-hint>DD/MM/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (projectForm.get('startDate')?.hasError('required')) {
+                <mat-error>
+                    La date de début du projet est <strong>obligatoire</strong>
+                </mat-error>
+            }
+        </mat-form-field>
+        <p>
+            @if(isAddMode) {
+                <button type="submit" matButton="filled" [disabled]="!projectForm.valid || isLoading">Créer projet</button>
+            }
+            @else {
+                <button type="submit" matButton="filled" [disabled]="!projectForm.valid || isLoading">Modifier projet</button>
+            }
+        </p>
+    </form>
+</section>

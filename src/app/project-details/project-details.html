@@ -1,0 +1,79 @@
+<article>
+  <section class="listing-details">
+    <h3 class="listing-heading">{{ projectInfo?.name }}</h3>
+    <small class="listing-date">Date de début : {{ projectInfo?.startDate | date:'dd/MM/yyyy' }}</small>
+    <h5 class="listing-small-heading">Description</h5>
+    <p class="listing-description">{{ projectInfo?.description }}</p>
+    <div class="example-button-row">
+      @if(isAdminOrMember(projectInfo.userRole)) {
+
+        <a [routerLink]="['/project-form', projectInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+        <a [routerLink]="['/project', projectInfo?.id, 'task-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Nouvelle tâche</a>
+      }
+      @if(isAdmin(projectInfo.userRole)) {
+        <a [routerLink]="['/project', projectInfo?.id, 'add-user-form']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Ajouter un utilisateur</a>
+        <a [routerLink]="['/project', projectInfo?.id, 'user-roles-manager']" mat-raised-button class="example-button"><mat-icon>add</mat-icon> Gestion des rôles</a>
+      }
+    </div>
+  </section>
+  <section>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Filtre status</mat-label>
+        <mat-select #status (selectionChange)="filterTasks($event.value)">
+          <mat-option [value]="null">-</mat-option>
+          @for (status of TaskStatus | keyvalue; track status) {
+            <mat-option [value]="status.key">{{status.value}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </p>
+    <div class="card-container">
+      @for(taskInfo of filteredTaskList; track taskInfo.id) {
+        <mat-card class="example-card" appearance="outlined">
+          <mat-card-header>
+            <mat-card-title class="card-title">{{ taskInfo?.name }}</mat-card-title>
+            <mat-card-subtitle><small>Date d'échéance : {{ taskInfo?.endDate | date:'dd/MM/yyyy' }}</small></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="card-content">
+            <p>{{ taskInfo?.description }}</p>
+          </mat-card-content>
+          <mat-card-footer class="example-card-footer">
+            <mat-chip-set aria-label="task traits">
+              @if(taskInfo.taskStatus !== undefined){
+                <mat-chip>Statut : {{ getTaskStatusValue(taskInfo.taskStatus) }}</mat-chip>
+              }
+              @if(taskInfo.taskPriority !== undefined) {
+                <mat-chip>Priorité : {{ getTaskPriorityValue(taskInfo.taskPriority) }}</mat-chip>
+              }
+            </mat-chip-set>
+            <mat-form-field appearance="fill">
+              <mat-label>Utilisateur assigné</mat-label>
+              <mat-select (selectionChange)="onUserAssignedSelected(taskInfo.id, $event.value)" [value]="taskInfo.user.id" [disabled]="!isAdminOrMember(projectInfo.userRole)">
+                <mat-option [value]="-1">-</mat-option>
+                @for (user of projectInfo.users; track id) {
+                  <mat-option [value]="user.id">{{user.name}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+            <span class="example-list-section">
+              <mat-checkbox
+                class="example-margin"
+                (change)="updateNotificationStatus(taskInfo.id, $event.checked)"
+                [checked]="taskInfo.notified"
+              >
+                Notification tâche assignée
+              </mat-checkbox>
+            </span>
+            <mat-card-actions>
+              <a [routerLink]="['/project-details', projectInfo?.id, 'task-details', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>history</mat-icon> Historique</a>
+              @if(isAdminOrMember(projectInfo.userRole)) { 
+                <a [routerLink]="['/project', projectInfo?.id, 'task-form', taskInfo?.id]" mat-raised-button class="example-button"><mat-icon>edit</mat-icon> Modifier</a>
+              }
+            </mat-card-actions>
+          </mat-card-footer>
+        </mat-card>
+      }
+    </div>
+  </section>
+</article>

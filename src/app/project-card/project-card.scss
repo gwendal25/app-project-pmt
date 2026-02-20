@@ -1,0 +1,26 @@
+.example-card {
+  max-width: 400px;
+  min-height: 200px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #89a5a2;
+}
+
+.card-title {
+  font-size: 16pt;
+}
+
+.card-date {
+  text-align: center;
+}
+
+.example-button-row {
+  display:flexbox;
+}
+
+.example-button {
+  margin: 8px 8px 8px 0;
+  border-radius: 2px;
+  border: 2px solid #a0c0bd;
+}
