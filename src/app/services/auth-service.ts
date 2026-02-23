@@ -9,7 +9,7 @@ import { UserLoginDto } from '../interfaces/user/userLoginDto';
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint = 'http://localhost:8081/users';
+  endpoint = 'http://localhost:8081/api/users';
   private httpClient:HttpClient = inject(HttpClient);
 
   httpOptions = {

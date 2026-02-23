@@ -11,7 +11,7 @@ import { ProjectTaskInfo } from '../interfaces/task/projectTask';
   providedIn: 'root',
 })
 export class TaskService {
-  endpoint = 'http://localhost:8081/tasks';
+  endpoint = 'http://localhost:8081/api/tasks';
   private httpClient:HttpClient = inject(HttpClient);
 
   httpOptions = {
